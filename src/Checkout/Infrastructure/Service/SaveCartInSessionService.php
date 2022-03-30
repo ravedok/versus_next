@@ -2,24 +2,24 @@
 
 namespace VS\Next\Checkout\Infrastructure\Service;
 
-use Argent\ShopBundle\Entity\CartLine;
-use Argent\ShopBundle\Model\CartLineInterface;
 use VS\Next\Checkout\Domain\Cart\Cart;
-use VS\Next\Checkout\Infrastructure\Helper\CartSessionHelper;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use VS\Next\Checkout\Domain\Cart\CartLine as CartCartLine;
+use VS\Next\Checkout\Infrastructure\Helper\CartSessionHelper;
 
 class SaveCartInSessionService
 {
-    public function __construct(private SessionInterface $session)
+    public function __construct(private RequestStack $requestStack)
     {
     }
-
+    
     public function __invoke(Cart $cart): void
     {
         $data = $this->cartToArray($cart);
 
-        $this->session->set(CartSessionHelper::SESSION_CART_KEY, $data);
+        $session = $this->requestStack->getSession();
+
+        $session->set(CartSessionHelper::SESSION_CART_KEY, $data);
     }
 
     /** @return array<string, array<int, array<string, int>>> */

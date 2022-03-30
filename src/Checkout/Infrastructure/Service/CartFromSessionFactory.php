@@ -2,17 +2,16 @@
 
 namespace VS\Next\Checkout\Infrastructure\Service;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use VS\Next\Catalog\Domain\Product\Entity\ProductId;
-use VS\Next\Catalog\Domain\Product\ProductRepository;
 use VS\Next\Checkout\Domain\Cart\Cart;
 use VS\Next\Checkout\Domain\Cart\NormalCartLine;
+use Symfony\Component\HttpFoundation\RequestStack;
+use VS\Next\Catalog\Domain\Product\Entity\ProductId;
+use VS\Next\Catalog\Domain\Product\ProductRepository;
 use VS\Next\Checkout\Infrastructure\Helper\CartSessionHelper;
 
 class CartFromSessionFactory
 {
-
-    public function __construct(private SessionInterface $session, private ProductRepository $productRepository)
+    public function __construct(private RequestStack $requestStack, private ProductRepository $productRepository)
     {
     }
 
@@ -20,11 +19,14 @@ class CartFromSessionFactory
     {
         $cart = new Cart();
 
-        if (!$this->session->has(CartSessionHelper::SESSION_CART_KEY)) {
+        $session = $this->requestStack->getSession();
+
+
+        if (false === $session->has(CartSessionHelper::SESSION_CART_KEY)) {
             return $cart;
         }
 
-        $sessionCart = $this->session->get(CartSessionHelper::SESSION_CART_KEY);
+        $sessionCart = $session->get(CartSessionHelper::SESSION_CART_KEY);
 
         if (!is_array($sessionCart)) {
             return $cart;

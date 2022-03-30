@@ -9,11 +9,6 @@ services:
         bind:
 
 
-    VS\Next\Catalog\Application\:
-        resource: "../../Application/"
-        exclude:
-            - "../../Application/**/*Request.php"
-
     VS\Next\Catalog\Infrastructure\:
         resource: "../../Infrastructure/"
 
