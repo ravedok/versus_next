@@ -17,14 +17,15 @@ class ProductMother
     public const NORMAL_SKU = 'NORMAL';
     public const VARIABLE_SKU = 'VARIABLE##XL';
 
-    public static function get(?int $id = null, ?string $sku = self::NORMAL_SKU): NormalProduct
+    public static function get(?string $id = null, ?string $sku = self::NORMAL_SKU): NormalProduct
     {
+        $productId = $id === null ? ProductId::random() : ProductId::fromString($id);
         if ($id === null) {
-            $id = rand(1, 1000);
+            
         }
 
         $product =  (new NormalProduct(
-            ProductId::fromInteger($id),
+            $productId,
             ProductSku::fromString($sku),
             ProductName::fromString('SIMPLE PRODUCT')
         ));

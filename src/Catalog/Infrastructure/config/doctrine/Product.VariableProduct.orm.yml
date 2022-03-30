@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Product\VariableProduct:
+  type: entity
+  oneToMany:
+      variations:
+          targetEntity: VS\Next\Catalog\Domain\Product\VariationProduct
+          mappedBy: parent

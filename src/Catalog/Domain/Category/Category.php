@@ -2,30 +2,32 @@
 
 namespace VS\Next\Catalog\Domain\Category;
 
-use Ramsey\Uuid\UuidInterface;
+use VS\Next\Catalog\Domain\Category\CategoryId;
+use VS\Next\Catalog\Domain\Category\CategoryName;
+
 
 class Category
 {
-    private UuidInterface $id;
-    private string $name;
+    private CategoryId $id;
+    private CategoryName $name;
 
-    public function __construct(UuidInterface $id, string $name)
+    public function __construct(CategoryId $id, CategoryName $name)
     {
         $this->id = $id;
         $this->name = $name;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): CategoryId
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): CategoryName
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(CategoryName $name): self
     {
         $this->name = $name;
 

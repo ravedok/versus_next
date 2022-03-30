@@ -1,0 +1,9 @@
+VS\Next\Catalog\Domain\Brand\Brand:
+  brand_ozone:
+    __construct: [<brandId()>, <brandNameFromString('Ozone')>]
+
+  brand_krom:
+    __construct: [<brandId()>, <brandNameFromString('Krom')>]
+
+  brand_drift:
+    __construct: [<brandId()>, <brandNameFromString('Drift')>]

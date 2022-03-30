@@ -1,5 +1,16 @@
 VS\Next\Catalog\Domain\Product\Entity\Product:
   type: entity
+  inheritanceType: SINGLE_TABLE
+  discriminatorColumn:
+    name: type
+    type: string
+    length: 10
+  discriminatorMap:
+    normal: VS\Next\Catalog\Domain\Product\NormalProduct
+    gift_card: VS\Next\Catalog\Domain\Product\GiftCardProduct
+    redeemable: VS\Next\Catalog\Domain\Product\RedeemableProduct
+    variable: VS\Next\Catalog\Domain\Product\VariableProduct
+    variation: VS\Next\Catalog\Domain\Product\VariationProduct
   table: products  
   repositoryClass: VS\Next\Catalog\Infrastructure\Repository\ProductDoctrineRepository
   id:
@@ -9,5 +20,8 @@ VS\Next\Catalog\Domain\Product\Entity\Product:
       id: true
   fields:
     name:
+      type: string
+      length: 30        
+    sku:
       type: string
       length: 30        

@@ -2,30 +2,28 @@
 
 namespace VS\Next\Catalog\Domain\Brand;
 
-use Ramsey\Uuid\UuidInterface;
-
 class Brand
 {
-    private UuidInterface $id;
-    private string $name;
+    private BrandId $id;
+    private BrandName $name;
 
-    public function __construct(UuidInterface $id, string $name)
+    public function __construct(BrandId $id, BrandName $name)
     {
         $this->id = $id;
         $this->name = $name;
     }
 
-    public function getId(): UuidInterface
+    public function getId(): BrandId
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): BrandName
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(BrandName $name): self
     {
         $this->name = $name;
 

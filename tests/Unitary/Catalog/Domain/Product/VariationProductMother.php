@@ -20,7 +20,7 @@ class VariationProductMother
             $parent = VariableProductMother::get();
         }
         return new VariationProduct(
-            ProductId::fromInteger(rand(1, 1000)),
+            ProductId::random(),
             ProductSku::fromString(self::SKU),
             ProductName::fromString('VARIABLE XXL'),
             $parent

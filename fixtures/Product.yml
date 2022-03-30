@@ -1,0 +1,26 @@
+VS\Next\Catalog\Domain\Product\NormalProduct:
+  product_strike_pro:
+    __construct: [<productId()>, <productSkuFromString('OZTACTICALSP')>, <productNameFromString('Tactical')>]
+
+VS\Next\Catalog\Domain\Product\GiftCardProduct:
+  gift_card:
+    __construct: [<productId()>, <productSkuFromString('VSGIFTCARD')>, <productNameFromString('Gift Card')>]
+
+VS\Next\Catalog\Domain\Product\RedeemableProduct:
+  windows_10_pro_oem:
+    __construct: [<productId()>, <productSkuFromString('FQC-08980')>, <productNameFromString('WINDOWS 10 PRO OEM')>]
+
+VS\Next\Catalog\Domain\Product\VariableProduct:
+  vs_team_shirt:
+    __construct: [<productId()>, <productSkuFromString('VSTEAM2K16')>, <productNameFromString('VS Team Shirt')>]
+
+VS\Next\Catalog\Domain\Product\VariationProduct:
+  vs_team_shirt_xl:
+    __construct: [<productId()>, <productSkuFromString('VSTEAM2K16XL')>, <productNameFromString('VS Team Shirt XL')>, '@vs_team_shirt']
+  vs_team_shirt_m:
+    __construct: [<productId()>, <productSkuFromString('VSTEAM2K16M')>, <productNameFromString('VS Team Shirt M')>, '@vs_team_shirt']
+  vs_team_shirt_xs:
+    __construct: [<productId()>, <productSkuFromString('VSTEAM2K16XS')>, <productNameFromString('VS Team Shirt XS')>, '@vs_team_shirt']
+
+
+

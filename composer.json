@@ -24,6 +24,7 @@
         "symfony/yaml": "6.0.*"
     },
     "require-dev": {
+        "hautelook/alice-bundle": "^2.10",
         "phpro/grumphp-shim": "^1.10",
         "phpstan/phpstan": "^1.5",
         "phpunit/phpunit": "^9.5",

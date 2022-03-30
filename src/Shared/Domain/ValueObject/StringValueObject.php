@@ -13,7 +13,7 @@ abstract class StringValueObject
         return $this->value;
     }
 
-    public static function fromString(string $value): self
+    public static function fromString(string $value): static
     {
         return new static($value);
     }

@@ -1,0 +1,9 @@
+VS\Next\Catalog\Domain\Category\Category:
+  category_keyboards:
+    __construct: [<categoryId()>, <categoryNameFromString('Keyboards')>]
+
+  category_mices:
+    __construct: [<categoryId()>, <categoryNameFromString('Mices')>]
+
+  category_chairs:
+    __construct: [<categoryId()>, <categoryNameFromString('Chairs')>]

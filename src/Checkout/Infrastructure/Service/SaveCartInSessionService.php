@@ -22,7 +22,7 @@ class SaveCartInSessionService
         $session->set(CartSessionHelper::SESSION_CART_KEY, $data);
     }
 
-    /** @return array<string, array<int, array<string, int>>> */
+    /** @return array<string, array<int, array<string, int|string>>> */
     private function cartToArray(Cart $cart): array
     {
         $data = [];

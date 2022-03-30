@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Product\VariationProduct:
+  type: entity
+  manyToOne:
+    parent:
+        targetEntity: VS\Next\Catalog\Domain\Product\VariableProduct
+        inversedBy: variations

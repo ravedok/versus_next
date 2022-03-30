@@ -8,6 +8,6 @@ class ProductIdMother
 {
     public static function random(): ProductId
     {
-        return ProductId::fromInteger(rand(1, 9999));
+        return ProductId::random();
     }
 }
