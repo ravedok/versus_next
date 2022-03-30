@@ -1,0 +1,10 @@
+doctrine:
+    orm:
+        auto_mapping: true
+        mappings:
+            VSNextCatalogBundle:
+                is_bundle: true
+                dir: 'config/doctrine'
+                type: yml
+                prefix: 'VS\Next\Catalog\Domain'
+                alias: VSNextCatalog

@@ -1,0 +1,12 @@
+VS\Next\Catalog\Domain\Category\Category:
+  type: entity
+  table: categories  
+  id:
+    id:
+      type: uuid
+      unique: true
+      id: true
+  fields:
+    name:
+      type: string
+      length: 30        

@@ -1,0 +1,12 @@
+VS\Next\Catalog\Domain\Brand\Brand:
+  type: entity
+  table: brands    
+  id:
+    id:
+      type: uuid
+      unique: true
+      id: true
+  fields:
+    name:
+      type: string
+      length: 30        

@@ -1,0 +1,13 @@
+VS\Next\Catalog\Domain\Product\Entity\Product:
+  type: entity
+  table: products  
+  repositoryClass: VS\Next\Catalog\Infrastructure\Repository\ProductDoctrineRepository
+  id:
+    id:
+      type: uuid
+      unique: true
+      id: true
+  fields:
+    name:
+      type: string
+      length: 30        
