@@ -1,2 +1,5 @@
 grumphp:
-    tasks: { phpstan: null }
+    tasks: 
+        phpstan: 
+            use_grumphp_paths: false
+        phpunit: ~ 
