@@ -1,0 +1,22 @@
+imports:
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+
+
+    VS\Next\Catalog\Application\:
+        resource: "../../Application/"
+        exclude:
+            - "../../Application/**/*Request.php"
+
+    VS\Next\Catalog\Infrastructure\:
+        resource: "../../Infrastructure/"
+
+
+    VS\Next\Catalog\Domain\Product\ProductRepository:
+        class: VS\Next\Catalog\Infrastructure\Repository\ProductDoctrineRepository

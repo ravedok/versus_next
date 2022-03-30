@@ -1,0 +1,11 @@
+vs_next_checkout_data:
+    resource:       '@VSNextCheckoutBundle/Controller'
+    type:           locale
+    prefix:         /
+
+vs_next_checkout_content:
+    resource:       '@VSNextCheckoutBundle/Controller/Content'
+    type:           locale
+    prefix:         /content
+    name_prefix:    _content_
+

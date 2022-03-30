@@ -1,0 +1,4 @@
+VS\Next\Checkout\Application\Content\AddProduct\AddProductRequest:
+    properties:
+        productSku:
+            - NotBlank: ~

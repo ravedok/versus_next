@@ -1,0 +1,21 @@
+# vs_next:
+#     resource:       '@VSFrontendBundle/Controller/'
+#     type:           locale
+#     prefix:         /
+
+# vs_frontend_preview:
+#     resource:       "@VSFrontendBundle/Controller/PreviewController.php"
+#     type: 			annotation
+
+# vs_frontend_accesscontrol_login_check:
+#     path:           /login/check
+
+# vs_frontend_accesscontrol_logout:
+#     path:           /logout
+
+# vs_frontend_old:
+#     path: /index.php
+#     defaults:
+#         _controller: FrameworkBundle:Redirect:urlRedirect
+#         path: /
+#         permanent: true

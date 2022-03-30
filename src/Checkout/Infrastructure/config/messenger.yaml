@@ -1,0 +1,7 @@
+framework:
+    messenger:
+        buses:
+            checkout_bus:
+                middleware:
+                    - validation
+                    - VS\Next\Checkout\Infrastructure\Messenger\SaveCartMiddleware

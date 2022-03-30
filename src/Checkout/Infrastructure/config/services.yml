@@ -1,0 +1,36 @@
+imports:
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+
+
+    # _instanceof:
+    #     VS\Next\Checkout\Infrastructure\Controller\Shared\AbstractHandlerController:
+    #       calls:
+    #           - setMessageBus: [Symfony\Component\Messenger\MessageBusInterface]
+    #           - setValidator: ["@validator"]
+
+    VS\Next\Checkout\Application\:
+        resource: "../../Application/"
+        exclude:
+            - "../../Application/**/*Request.php"
+
+    VS\Next\Checkout\Infrastructure\:
+        resource: "../../Infrastructure/"
+
+    VS\Next\Checkout\Domain\Cart\CartRepository:
+        factory: '@VS\Next\Checkout\Infrastructure\Service\CartRepositoryFactory'
+
+    Symfony\Component\Messenger\MessageBusInterface:
+      alias: 'checkout_bus'
+
+
+
+
+
+
