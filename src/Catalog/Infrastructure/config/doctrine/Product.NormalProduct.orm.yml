@@ -1,2 +1,9 @@
 VS\Next\Catalog\Domain\Product\NormalProduct:
   type: entity
+  embedded:
+    stored:
+      class: VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock
+    virtual:
+      class: VS\Next\Catalog\Domain\Product\Entity\ProductVirtualStock
+    onDemand:
+      class: VS\Next\Catalog\Domain\Product\Entity\ProductOnDemandStock

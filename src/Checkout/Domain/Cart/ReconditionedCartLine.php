@@ -4,7 +4,7 @@ namespace VS\Next\Checkout\Domain\Cart;
 
 use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Catalog\Domain\Product\Entity\ProductReconditionedStockInterface;
-use Versus\Checkout\ShoppingCart\Exception\Content\ProductNotAllowRencoditionedStockException;
+use VS\Next\Checkout\Domain\Cart\Exception\ProductNotAllowRencoditionedStockException;
 
 class ReconditionedCartLine extends CartLine
 {

@@ -16,10 +16,7 @@ class SetProductHandler implements MessageHandlerInterface
     public function __invoke(SetProductRequest $request): void
     {
         $line = $this->obtainCartLineFromRequestService->findOrCreate($request);
-
-        $line->ensureHasEnoughtStock($request->getUnits());
-
-
-        $line->setUnits($request->getUnits());
+        $line->ensureHasEnoughtStock($request->units);
+        $line->setUnits($request->units);
     }
 }

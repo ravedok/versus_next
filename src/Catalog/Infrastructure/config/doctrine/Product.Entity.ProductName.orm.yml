@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Product\Entity\ProductName:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: name      

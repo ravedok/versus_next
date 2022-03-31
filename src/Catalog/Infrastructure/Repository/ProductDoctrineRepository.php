@@ -7,6 +7,7 @@ use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Catalog\Domain\Product\ProductRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use VS\Next\Catalog\Domain\Product\Entity\ProductId;
+use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Catalog\Domain\Product\Exception\ProductNotFoundException;
 
 /** 
@@ -21,17 +22,17 @@ class ProductDoctrineRepository extends ServiceEntityRepository implements Produ
 
     public function findOneById(ProductId $id): ?Product
     {
-        return parent::find($id->value());
+        return parent::find($id);
     }
 
-    public function findOneBySku(string $sku): ?Product
+    public function findOneBySku(ProductSku $sku): ?Product
     {
-        return parent::findOneBy(['sku' => $sku]);
+        return parent::findOneBy(['sku.value' => $sku]);
     }
 
-    public function findOneBySkuOrFail(string $sku): Product
+    public function findOneBySkuOrFail(ProductSku $sku): Product
     {
-        $product = parent::findOneBy(['sku' => $sku]);
+        $product = parent::findOneBy(['sku.value' => $sku->value()]);
 
         if (!$product) {
             throw new ProductNotFoundException;

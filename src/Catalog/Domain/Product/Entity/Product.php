@@ -21,7 +21,7 @@ abstract class Product
     private ?Category $category;
     /** @var ArrayCollection<int, Brand> */
     private Collection $brands;
-    protected bool $stockable;
+    protected bool $stockable = true;
     private bool $allowDirectSales;
     private bool $allowPromotions;
 

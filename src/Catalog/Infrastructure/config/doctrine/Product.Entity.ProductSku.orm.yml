@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Product\Entity\ProductSku:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: sku

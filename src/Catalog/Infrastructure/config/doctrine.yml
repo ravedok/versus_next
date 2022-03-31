@@ -1,4 +1,7 @@
 doctrine:
+    dbal:
+        types:
+            product_id: VS\Next\Catalog\Infrastructure\Doctrine\ProductIdType
     orm:
         auto_mapping: true
         mappings:

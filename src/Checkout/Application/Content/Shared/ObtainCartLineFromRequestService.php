@@ -6,7 +6,7 @@ use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Checkout\Domain\Cart\CartLineOption;
 use VS\Next\Checkout\Domain\Cart\CartRepository;
 use VS\Next\Checkout\Domain\Cart\NormalCartLine;
-use VS\Next\Catalog\Domain\Product\Entity\Product;
+use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Checkout\Domain\Cart\GiftCardCartLine;
 use VS\Next\Catalog\Domain\Product\GiftCardProduct;
 use VS\Next\Checkout\Domain\Cart\CustomizedCartLine;
@@ -14,7 +14,6 @@ use VS\Next\Checkout\Domain\Cart\RedeemableCartLine;
 use VS\Next\Catalog\Domain\Product\ProductRepository;
 use VS\Next\Catalog\Domain\Product\RedeemableProduct;
 use VS\Next\Checkout\Domain\Cart\ReconditionedCartLine;
-use VS\Next\Catalog\Domain\Product\Exception\ProductNotFoundException;
 use VS\Next\Checkout\Application\Content\Shared\AbstractContentRequest;
 use VS\Next\Checkout\Infrastructure\Controller\Shared\CartLineOptionDto;
 
@@ -52,11 +51,15 @@ class ObtainCartLineFromRequestService
 
     private function createNewCartLine(AbstractContentRequest $request): CartLine
     {
-        $product  = $this->getProductFromSku($request->getProductSku());
+        $productSku = ProductSku::fromString($request->productSku);
+
+        // $product  = $this->getProductFromSku($productSku);
+
+        $product = $this->productRepository->findOneBySkuOrFail($productSku);
 
         $product->ensureIsForDirectSale();
 
-        if ($request->isReconditioned()) {
+        if ($request->isReconditioned) {
             return new ReconditionedCartLine($product);
         }
 
@@ -68,8 +71,8 @@ class ObtainCartLineFromRequestService
             return new GiftCardCartLine($product);
         }
 
-        $options = $request->getOptions();
-        
+        $options = $request->options;
+
         if (count($options)) {
 
             $customizedCartLine = new CustomizedCartLine($product);
@@ -82,24 +85,14 @@ class ObtainCartLineFromRequestService
         return new NormalCartLine($product);
     }
 
-    private function getProductFromSku(string $productSku): Product
-    {
-        $product = $this->productRepository->findOneBySku($productSku);
-
-        if (!$product) {
-            throw ProductNotFoundException::fromSku($productSku);
-        }
-
-        return $product;
-    }
-
     /**
      * @param CartLineOptionDto[] $options
      * */
     private function addCartLineOptionsFromRequest(CustomizedCartLine $cartLine, array $options): void
     {
         foreach ($options as $option) {
-            $product = $this->productRepository->findOneBySkuOrFail($option->getProductSku());
+            $optionProductSku = ProductSku::fromString($option->getProductSku());
+            $product = $this->productRepository->findOneBySkuOrFail($optionProductSku);
 
             $product->ensureIsAllowedAsAnOption();
 

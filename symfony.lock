@@ -141,6 +141,9 @@
     "phpspec/prophecy": {
         "version": "v1.15.0"
     },
+    "phpstan/phpdoc-parser": {
+        "version": "1.4.2"
+    },
     "phpstan/phpstan": {
         "version": "1.5.2"
     },
@@ -408,6 +411,9 @@
     },
     "symfony/runtime": {
         "version": "v6.0.5"
+    },
+    "symfony/serializer": {
+        "version": "v6.0.6"
     },
     "symfony/service-contracts": {
         "version": "v3.0.0"

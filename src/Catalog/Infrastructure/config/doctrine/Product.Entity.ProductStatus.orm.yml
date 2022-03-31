@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Product\Entity\ProductStatus:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: status      

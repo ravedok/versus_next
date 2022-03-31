@@ -3,7 +3,7 @@
 namespace VS\Next\Checkout\Domain\Cart;
 
 use VS\Next\Catalog\Domain\Product\Entity\Product;
-use Versus\Checkout\ShoppingCart\Exception\Content\NotEnoughStockException;
+use VS\Next\Checkout\Domain\Cart\Exception\NotEnoughStockException;
 
 abstract class CartLine
 {

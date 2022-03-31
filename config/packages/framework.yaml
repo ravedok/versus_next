@@ -19,6 +19,11 @@ framework:
 
     property_access: ~ 
 
+    serializer:
+        default_context:
+            enable_max_depth: true
+            collect_denormalization_errors: true
+
 
 when@test:
     framework:

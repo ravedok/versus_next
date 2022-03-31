@@ -17,10 +17,10 @@ class AddProductHandler implements MessageHandlerInterface
     {
         $line = $this->obtainCartLineFromRequestService->findOrCreate($request);
 
-        $finalUnits = $line->getUnits() + $request->getUnits();
+        $finalUnits = $line->getUnits() + $request->units;
 
         $line->ensureHasEnoughtStock($finalUnits);
 
-        $line->addUnits($request->getUnits());
+        $line->addUnits($request->units);
     }
 }

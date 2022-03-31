@@ -29,6 +29,12 @@ trait ProductStockableTrait
         return $this->stored;
     }
 
+    public function setStored(ProductStoredStock $productStoredStock): self
+    {
+        $this->stored = $productStoredStock;
+        return $this;
+    }
+
     public function getVirtual(): ProductVirtualStock
     {
         return $this->virtual;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Versus\Checkout\ShoppingCart\Exception\Content;
+namespace VS\Next\Checkout\Domain\Cart\Exception;
 
 use DomainException;
 use VS\Next\Catalog\Domain\Product\Entity\Product;

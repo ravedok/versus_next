@@ -1,0 +1,7 @@
+VS\Next\Catalog\Domain\Product\Entity\ProductOnDemandStock:
+  type: embeddable
+  fields:
+    stock: 
+      type: integer
+    cost:
+      type: float

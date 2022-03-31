@@ -17,10 +17,10 @@ class ReduceProductHandler implements MessageHandlerInterface
     {
         $line = $this->obtainCartLineFromRequestService->findOrCreate($request);
 
-        $finalUnits = $line->getUnits() - $request->getUnits();
+        $finalUnits = $line->getUnits() - $request->units;
 
         $line->ensureHasEnoughtStock($finalUnits);
 
-        $line->reduceUnits($request->getUnits());
+        $line->reduceUnits($request->units);
     }
 }

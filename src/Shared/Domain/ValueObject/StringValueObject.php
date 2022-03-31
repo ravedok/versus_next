@@ -4,7 +4,7 @@ namespace VS\Next\Shared\Domain\ValueObject;
 
 abstract class StringValueObject
 {
-    final public function __construct(private string $value)
+    final public function __construct(protected string $value)
     {
     }
 

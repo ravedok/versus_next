@@ -10,7 +10,8 @@ use VS\Next\Checkout\Infrastructure\Controller\Shared\AbstractHandlerController;
 class CheckoutDataAction extends AbstractHandlerController
 {
     #[Route('/', name: 'data', methods: ['GET'])]
-    public function __invoke(Request $request): void
+    public function __invoke(Request $request): Response
     {
+        return new Response();
     }
 }
