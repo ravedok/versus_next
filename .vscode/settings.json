@@ -1,0 +1,22 @@
+{
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": false,
+
+    "[php]": {
+      "editor.formatOnSave": true
+    },
+
+    "[javascript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "[scss]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
