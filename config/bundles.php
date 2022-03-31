@@ -12,4 +12,5 @@ return [
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['dev' => true, 'test' => true],
     VS\Next\Catalog\Infrastructure\VSNextCatalogBundle::class => ['all' => true],
     VS\Next\Checkout\Infrastructure\VSNextCheckoutBundle::class => ['all' => true],
+    FriendsOfBehat\SymfonyExtension\Bundle\FriendsOfBehatSymfonyExtensionBundle::class => ['test' => true],
 ];
