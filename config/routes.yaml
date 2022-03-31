@@ -5,3 +5,8 @@
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+vs_next_checkout:
+    resource:       "@VSNextCheckoutBundle/config/routing.yml"
+    prefix:         /checkout
+    name_prefix:    vs_next_checkout

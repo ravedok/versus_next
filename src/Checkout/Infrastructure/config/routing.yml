@@ -1,11 +1,10 @@
-vs_next_checkout_data:
-    resource:       '@VSNextCheckoutBundle/Controller'
-    type:           locale
-    prefix:         /
-
 vs_next_checkout_content:
-    resource:       '@VSNextCheckoutBundle/Controller/Content'
-    type:           locale
+    resource:       '@VSNextCheckoutBundle/Controller/Content/*.php'
+    type:           annotation
     prefix:         /content
     name_prefix:    _content_
 
+vs_next_checkout:
+    resource:       '@VSNextCheckoutBundle/Controller/*.php'
+    type:           annotation
+    name_prefix:    _
