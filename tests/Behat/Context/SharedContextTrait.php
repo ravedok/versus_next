@@ -2,8 +2,9 @@
 
 namespace VS\Next\Tests\Behat\Context;
 
-use Behat\Behat\Context\Environment\InitializedContextEnvironment;
+use Behat\Gherkin\Node\PyStringNode;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
+use Behat\Behat\Context\Environment\InitializedContextEnvironment;
 
 trait SharedContextTrait
 {
@@ -28,5 +29,28 @@ trait SharedContextTrait
     public function save(string $key, $value): void
     {
         $this->sharingContext->merge([$key => $value]);
+    }
+
+    public function getSessionValue(string $key): void
+    {
+        $this->sharingContext->getSharedSession()->get($key);
+    }
+
+    public function setSessionValue(string $key, $value): void
+    {
+        $this->sharingContext->getSharedSession()->set($key, $value);
+    }
+
+    private function pyStringNodeWithContextToArray(PyStringNode $content): array
+    {
+        return json_decode($this->pyStringNodeWithContext($content), true);
+    }
+
+    private function pyStringNodeWithContext(PyStringNode $content): string
+    {
+        $rawContent = $content->getRaw();
+        $this->renderTwigTemplate($rawContent);
+
+        return $rawContent;
     }
 }

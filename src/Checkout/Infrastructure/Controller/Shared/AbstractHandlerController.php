@@ -6,21 +6,15 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 abstract class AbstractHandlerController extends AbstractController
 {
-    use HandleTrait {
-        handle as private handleMessage;
-    }
+    use HandleTrait;
 
     private DenormalizerInterface $denormalizer;
     private RequestStack $requestStack;
-
-    protected function handle(object $message): mixed
-    {
-        return $this->handleMessage($message);
-    }
 
     protected function handleFromRequest(string $requestNameClass): mixed
     {

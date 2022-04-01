@@ -7,6 +7,7 @@ default:
                 - VS\Next\Tests\Behat\Context\FixtureContext
                 - VS\Next\Tests\Behat\Context\SharingContext
                 - VS\Next\Tests\Behat\Context\RequestContext
+                - VS\Next\Tests\Behat\Context\SessionContext
 
     extensions:                
         FriendsOfBehat\SymfonyExtension:   

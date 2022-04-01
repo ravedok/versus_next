@@ -12,7 +12,7 @@ class SaveCartInSessionService
     public function __construct(private RequestStack $requestStack)
     {
     }
-    
+
     public function __invoke(Cart $cart): void
     {
         $data = $this->cartToArray($cart);
@@ -30,7 +30,7 @@ class SaveCartInSessionService
         $data['lines'] = $cart->getLines()->map(function (CartCartLine $line) {
             $product = $line->getProduct();
             return [
-                'id'         => $product->getId()->value(),
+                'productId'         => $product->getId()->value(),
                 'units'      => $line->getUnits()
             ];
         })->toArray();

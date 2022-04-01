@@ -34,7 +34,13 @@ class CartFromSessionFactory
 
         foreach ($sessionCart['lines'] as $line) {
 
-            $productId = new ProductId($line['id']);
+            $productIdInSession = $line['productId'] ?? null;
+
+            if (null === $productIdInSession) {
+                continue;
+            }
+
+            $productId = new ProductId($productIdInSession);
             $product = $this->productRepository->findOneById($productId);
 
             if ($product === null) {

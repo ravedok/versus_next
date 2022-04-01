@@ -3,16 +3,22 @@
 namespace VS\Next\Tests\Behat\Context;
 
 use ArrayAccess;
-use Behat\Behat\Context\Context;
 use Twig\Environment;
+use Behat\Behat\Context\Context;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class SharingContext implements Context, ArrayAccess
 {
     /** @var array */
     private $values = [];
 
+    private SessionInterface $sharedSession;
+
     public function __construct(private Environment $twig)
     {
+        $this->sharedSession = new Session(new MockArraySessionStorage());
     }
 
     /**
@@ -48,7 +54,7 @@ class SharingContext implements Context, ArrayAccess
         return array_key_exists($offset, $this->values);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->values[$offset];
     }
@@ -66,5 +72,10 @@ class SharingContext implements Context, ArrayAccess
     public function merge(array $array): void
     {
         $this->values = array_merge($this->values, $array);
+    }
+
+    public function getSharedSession(): SessionInterface
+    {
+        return $this->sharedSession;
     }
 }

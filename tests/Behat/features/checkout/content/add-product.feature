@@ -9,7 +9,7 @@ Feature: add-product
     When I send a "POST" request to "/checkout/content/add" with body:
     """
     {
-      "productSku": "OZTACTICALSP",
+      "productSku": "{{ product_tactical_sp.sku }}",
       "units": {{ product_tactical_sp.stored.stock }}
     }
     """
@@ -30,11 +30,20 @@ Feature: add-product
     }
     """
   Scenario: Check fail when adding more units than available
+    Given The session variable "cart" contain:
+    """
+      {
+        "lines": [{
+          "productId": "{{ product_tactical_sp.id }}",
+          "units": 1
+        }]
+      }
+    """
     When I send a "POST" request to "/checkout/content/add" with body:
     """
     {
-      "productSku": "OZTACTICALSP",
-      "units": {{ product_tactical_sp.stored.stock + 1}}
+      "productSku": "{{ product_tactical_sp.sku }}",
+      "units": {{ product_tactical_sp.stored.stock}}
     }
     """
     Then the response status code should be "400"

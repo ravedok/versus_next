@@ -8,7 +8,10 @@ use Behat\Gherkin\Node\PyStringNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class RequestContext extends Assert implements Context
 {
@@ -19,7 +22,6 @@ class RequestContext extends Assert implements Context
 
     public function __construct(private KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**
@@ -27,7 +29,7 @@ class RequestContext extends Assert implements Context
      */
     public function iSendARequestTo(string $method, string $path)
     {
-        $this->response = $this->kernel->handle(Request::create($path, $method));
+        $this->request($path, $method);
     }
 
     /**
@@ -43,12 +45,10 @@ class RequestContext extends Assert implements Context
      */
     public function iSendARequestToWithBody(string $method, string $path, PyStringNode $body)
     {
-        $rawBody = $body->getRaw();
-        $this->renderTwigTemplate($rawBody);
+        $bodyWithContent = $this->pyStringNodeWithContext($body);
 
-        $json = json_encode(json_decode($rawBody, true));
-
-        $this->response = $this->kernel->handle(Request::create($path, $method, [], [], [], [],  $json));
+        $json = json_encode(json_decode($bodyWithContent, true));
+        $this->request($path, $method, content: $json);
     }
 
     /**
@@ -56,14 +56,38 @@ class RequestContext extends Assert implements Context
      */
     public function theResponseContentShouldInclude(PyStringNode $body)
     {
-        $rawBody = $body->getRaw();
-        $this->renderTwigTemplate($rawBody);
+        $bodyWithContext = $this->pyStringNodeWithContextToArray($body);
 
         $content = $this->response->getContent();
         $jsonContent = json_decode($content, true);
 
-        $jsonBody = json_decode($rawBody, true);
+        self::assertArraySubset($bodyWithContext, $jsonContent);
+    }
 
-        self::assertArraySubset($jsonBody, $jsonContent);
+    private function request(
+        string $path,
+        string $method,
+        array $parameters = [],
+        array $cookies = [],
+        array $files = [],
+        array $server = [],
+        mixed $content = null
+    ): void {
+
+        $request = Request::create($path, $method, $parameters, $cookies, $files, $server, $content);
+
+        $request->setSession($this->sharingContext->getSharedSession());
+
+
+        $this->response = $this->kernel->handle($request);
+    }
+
+    private function getSession(): SessionInterface
+    {
+        if (!isset($this->session)) {
+            $this->session = new Session(new MockArraySessionStorage());
+        }
+
+        return $this->session;
     }
 }
