@@ -5,3 +5,8 @@ services:
 
     VS\Next\Tests\Behat\:
         resource: '../tests/Behat/*'
+
+    VS\Next\Tests\Behat\Context\FixtureContext:
+        arguments:
+            $loader: '@fidry_alice_data_fixtures.doctrine.persister_loader'
+            $fixturesBasePath: '%kernel.project_dir%/tests/Behat/fixtures/'

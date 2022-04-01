@@ -1,0 +1,16 @@
+default:
+    suites:
+        default:
+            paths:
+                features: 'tests/Behat/features/'
+            contexts:
+                - VS\Next\Tests\Behat\Context\FixtureContext
+                - VS\Next\Tests\Behat\Context\SharingContext
+                - VS\Next\Tests\Behat\Context\RequestContext
+
+    extensions:                
+        FriendsOfBehat\SymfonyExtension:   
+            bootstrap: 'tests/bootstrap.php'
+            kernel:
+                class: VS\Next\Kernel
+                environment: test

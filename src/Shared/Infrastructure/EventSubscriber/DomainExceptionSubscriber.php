@@ -9,7 +9,7 @@ use VS\Next\Shared\Domain\Exception\DomainNotFoundException;
 use VS\Next\Shared\Domain\Exception\DomainBadRequestException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DomainExceptionSubscriber implements EventSubscriberInterface
@@ -46,7 +46,7 @@ class DomainExceptionSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event->setThrowable(new BadRequestException($exception->getMessage()));
+        $event->setThrowable(new BadRequestHttpException($exception->getMessage()));
     }
 
     private function handleNotFoundException(ExceptionEvent $event, Throwable $exception): void

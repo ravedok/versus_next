@@ -1,8 +1,8 @@
 
 VS\Next\Catalog\Domain\Product\NormalProduct:
-  product_strike_pro:
+  product_tactical_sp:
     __construct: [<productId()>, <productSkuFromString('OZTACTICALSP')>, <productNameFromString('Tactical')>]
-    stored: <(new VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock(4, 10))>
+    stored: <productStoredStock(4, 10)>
 
 VS\Next\Catalog\Domain\Product\GiftCardProduct:
   gift_card:

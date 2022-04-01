@@ -3,3 +3,4 @@ grumphp:
         phpstan: 
             use_grumphp_paths: false
         phpunit: ~ 
+        behat: ~

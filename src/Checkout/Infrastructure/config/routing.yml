@@ -5,6 +5,6 @@ vs_next_checkout_content:
     name_prefix:    _content_
 
 vs_next_checkout:
-    resource:       '@VSNextCheckoutBundle/Controller/*.php'
+    resource:       '@VSNextCheckoutBundle/Controller/CheckoutDataAction.php'    
     type:           annotation
     name_prefix:    _

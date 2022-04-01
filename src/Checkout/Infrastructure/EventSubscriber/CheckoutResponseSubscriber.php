@@ -3,11 +3,9 @@
 namespace VS\Next\Checkout\Infrastructure\EventSubscriber;
 
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use VS\Next\Checkout\Infrastructure\Service\CheckoutResponseCreator;
 
 class CheckoutResponseSubscriber implements EventSubscriberInterface
@@ -19,17 +17,11 @@ class CheckoutResponseSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE => 'onResponse',
-            KernelEvents::EXCEPTION => 'onException'
+            KernelEvents::VIEW => 'onView',
         ];
     }
-
-    public function onException(ExceptionEvent $event): void
+    public function onView(ViewEvent $event): void
     {
-        if (!$event->getThrowable() instanceof ControllerDoesNotReturnResponseException) {
-            return;
-        }
-
         if (!$this->isCheckoutController($event)) {
             return;
         }
@@ -37,24 +29,7 @@ class CheckoutResponseSubscriber implements EventSubscriberInterface
         $this->overwriteResponseWithCartData($event);
     }
 
-    public function onResponse(ResponseEvent $event): void
-    {
-        if ($event->getResponse()->isServerError()) {
-            return;
-        }
-
-        if ($event->getResponse()->isClientError()) {
-            return;
-        }
-
-        if (!$this->isCheckoutController($event)) {
-            return;
-        }
-
-        $this->overwriteResponseWithCartData($event);
-    }
-
-    private function overwriteResponseWithCartData(ResponseEvent | ExceptionEvent  $event): void
+    private function overwriteResponseWithCartData(ViewEvent   $event): void
     {
         $checkoutData = ($this->createCheckoutResponse)();
 
@@ -64,7 +39,7 @@ class CheckoutResponseSubscriber implements EventSubscriberInterface
     }
 
 
-    private function isCheckoutController(ResponseEvent | ExceptionEvent $event): bool
+    private function isCheckoutController(ViewEvent $event): bool
     {
         $request = $event->getRequest();
         $controllerName = $request->attributes->get('_controller');
