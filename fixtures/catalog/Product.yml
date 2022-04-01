@@ -2,7 +2,7 @@
 VS\Next\Catalog\Domain\Product\NormalProduct:
   product_strike_pro:
     __construct: [<productId()>, <productSkuFromString('OZTACTICALSP')>, <productNameFromString('Tactical')>]
-    stored: <productStoredStock(4, 10)>
+    stored: <(new VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock(4, 10))>
 
 VS\Next\Catalog\Domain\Product\GiftCardProduct:
   gift_card:
@@ -10,7 +10,7 @@ VS\Next\Catalog\Domain\Product\GiftCardProduct:
 
 VS\Next\Catalog\Domain\Product\RedeemableProduct:
   windows_10_pro_oem:
-    __construct: [<productId()>, <productSkuFromString('FQC-08980')>, <productNameFromString('WINDOWS 10 PRO OEM')>]
+    __construct: [<productId()>, <(VS\Next\Catalog\Domain\Product\Entity\ProductSku::fromString('FQC-08980'))>, <productNameFromString('WINDOWS 10 PRO OEM')>]
 
 VS\Next\Catalog\Domain\Product\VariableProduct:
   vs_team_shirt:

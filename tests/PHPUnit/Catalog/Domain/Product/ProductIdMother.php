@@ -1,6 +1,6 @@
 <?php
 
-namespace VS\Next\Tests\Unitary\Catalog\Domain\Product;
+namespace VS\Next\Tests\PHPUnit\Catalog\Domain\Product;
 
 use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 

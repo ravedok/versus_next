@@ -1,6 +1,6 @@
 <?php
 
-namespace VS\Next\Tests\Unitary\Catalog\Domain\Product;
+namespace VS\Next\Tests\PHPUnit\Catalog\Domain\Product;
 
 
 use Ramsey\Uuid\UuidInterface;
@@ -21,7 +21,6 @@ class ProductMother
     {
         $productId = $id === null ? ProductId::random() : ProductId::fromString($id);
         if ($id === null) {
-            
         }
 
         $product =  (new NormalProduct(

@@ -7,7 +7,6 @@ use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Catalog\Domain\Product\Entity\ProductName;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock;
-use VS\Next\Shared\Domain\ValueObject\Uuid;
 
 class ProductProvider extends Base
 {

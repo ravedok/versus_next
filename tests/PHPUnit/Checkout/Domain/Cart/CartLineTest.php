@@ -1,11 +1,11 @@
 <?php
 
-namespace VS\Next\Tests\Unitary\Checkout\Domain\Cart;
+namespace VS\Next\Tests\PHPUnit\Checkout\Domain\Cart;
 
 use PHPUnit\Framework\TestCase;
-use VS\Next\Tests\Unitary\Catalog\Domain\Product\VariationProductMother;
-use VS\Next\Tests\Unitary\Catalog\Domain\Product\ProductMother;
-use VS\Next\Tests\Unitary\Checkout\Domain\Cart\NormalCartLineMother;
+use VS\Next\Tests\PHPUnit\Catalog\Domain\Product\VariationProductMother;
+use VS\Next\Tests\PHPUnit\Catalog\Domain\Product\ProductMother;
+use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\NormalCartLineMother;
 
 class CartLineTest extends TestCase
 {

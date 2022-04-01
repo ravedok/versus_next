@@ -1,6 +1,8 @@
 VS\Next\Catalog\Domain\Brand\Brand:
   brand_ozone:
-    __construct: [<brandId()>, <brandNameFromString('Ozone')>]
+    __construct: 
+        - <brandId()>
+        - <brandNameFromString('Ozone')>
 
   brand_krom:
     __construct: [<brandId()>, <brandNameFromString('Krom')>]

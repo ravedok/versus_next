@@ -1,6 +1,6 @@
 <?php
 
-namespace VS\Next\Tests\Unitary\Checkout\Domain\Cart;
+namespace VS\Next\Tests\PHPUnit\Checkout\Domain\Cart;
 
 use VS\Next\Checkout\Domain\Cart\Cart;
 
