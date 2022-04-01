@@ -86,6 +86,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "fixtures-load": [
+            "php bin/console hautelook:fixtures:load --quiet --no-bundles"
         ]
     },
     "conflict": {
