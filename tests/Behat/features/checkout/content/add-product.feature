@@ -10,7 +10,7 @@ Feature: add-product
     """
     {
       "productSku": "{{ product_tactical_sp.sku }}",
-      "units": {{ product_tactical_sp.stored.stock }}
+      "units": {{ product_tactical_sp.stored.stock}}
     }
     """
     Then the response status code should be "200"

@@ -34,6 +34,17 @@ class Cart
         return $this;
     }
 
+    public function removeLine(CartLine $cartLine): self
+    {
+        if (!$this->lines->contains($cartLine)) {
+            return $this;
+        }
+
+        $this->lines->removeElement($cartLine);
+
+        return $this;
+    }
+
     public function findLine(CartLine $lineToFind): ?CartLine
     {
         foreach ($this->lines as $line) {

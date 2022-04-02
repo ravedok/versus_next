@@ -5,6 +5,10 @@ Feature: checkout-data
   Background:
     Given the fixtures file "global-fixtures.yaml" is loaded
   
+  Scenario: check that an empty session returns an empty cart    
+    When I send a "GET" request to "/checkout"
+    Then the response status code should be "200"
+      And the response value "content.lines" should be empty:    
   Scenario: Check successful
     Given The session variable 'cart' contain:
       """

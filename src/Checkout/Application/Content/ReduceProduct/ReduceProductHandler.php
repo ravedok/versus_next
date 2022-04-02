@@ -15,11 +15,11 @@ class ReduceProductHandler implements MessageHandlerInterface
 
     public function __invoke(ReduceProductRequest $request): void
     {
-        $line = $this->obtainCartLineFromRequestService->findOrCreate($request);
+        $line = $this->obtainCartLineFromRequestService->find($request);
 
-        $finalUnits = $line->getUnits() - $request->units;
-
-        $line->ensureHasEnoughtStock($finalUnits);
+        if (!$line) {
+            return;
+        }
 
         $line->reduceUnits($request->units);
     }

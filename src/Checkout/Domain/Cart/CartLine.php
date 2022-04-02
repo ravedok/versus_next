@@ -46,19 +46,23 @@ abstract class CartLine
     {
         $this->units = $units;
 
+        if ($this->units <= 0) {
+            return $this->removeMe();
+        }
+
         return $this;
     }
 
     public function addUnits(int $units): self
     {
-        $this->units += $units;
+        $this->setUnits($this->units + $units);
 
         return $this;
     }
 
     public function reduceUnits(int $units): self
     {
-        $this->units -= $units;
+        $this->setUnits($this->units - $units);
 
         return $this;
     }
@@ -82,5 +86,13 @@ abstract class CartLine
         if ($units > $maxUnits) {
             throw new NotEnoughStockException;
         }
+    }
+
+    public function removeMe(): self
+    {
+        $cart = $this->getCart();
+        $cart->removeLine($this);
+
+        return $this;
     }
 }

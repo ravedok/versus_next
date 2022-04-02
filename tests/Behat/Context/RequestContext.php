@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
@@ -48,21 +49,54 @@ class RequestContext extends Assert implements Context
         $bodyWithContent = $this->pyStringNodeWithContext($body);
 
         $json = json_encode(json_decode($bodyWithContent, true));
+
+        if ($json === null && json_last_error() !== JSON_ERROR_NONE) {
+            throw new \InvalidArgumentException("The provided body is not in a valid json format");
+        }
+
+
         $this->request($path, $method, content: $json);
     }
 
     /**
-     * @Then the response content should include:
+     * @Then The response content should include:
      */
     public function theResponseContentShouldInclude(PyStringNode $body)
     {
         $bodyWithContext = $this->pyStringNodeWithContextToArray($body);
 
-        $content = $this->response->getContent();
-        $jsonContent = json_decode($content, true);
+        $jsonContent = $this->response->getContent();
+        $content = json_decode($jsonContent, true);
 
-        self::assertArraySubset($bodyWithContext, $jsonContent);
+        self::assertArraySubset($bodyWithContext, $content);
     }
+
+    /**
+     * @Then The response value :path should be empty:
+     */
+    public function theResponseValueShouldBeEmpty(mixed $path)
+    {
+        $jsonContent = $this->response->getContent();
+
+        $content = json_decode($jsonContent, true);
+
+        $value = $this->getArrayValueFromPath($content, $path);
+
+        $this->assertEmpty($value);
+    }
+
+    private function getArrayValueFromPath(array $array, string $path): mixed
+    {
+        $path = explode('.', $path);
+        $temp = &$array;
+
+        foreach ($path as $key) {
+            $temp = &$temp[$key];
+        }
+
+        return $temp;
+    }
+
 
     private function request(
         string $path,
