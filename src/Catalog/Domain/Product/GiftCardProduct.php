@@ -18,6 +18,11 @@ class GiftCardProduct extends Product
         $this->type = ProductType::createGiftCard();
     }
 
+    public function getPrice(): float
+    {
+        return 0;
+    }
+
     public function getAvailableStock(): int
     {
         return 9999999;

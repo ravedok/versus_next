@@ -95,4 +95,9 @@ abstract class CartLine
 
         return $this;
     }
+
+    public function getTotal(): float
+    {
+        return $this->getUnits() * $this->getProduct()->getPrice();
+    }
 }

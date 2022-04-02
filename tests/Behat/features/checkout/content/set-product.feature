@@ -9,7 +9,7 @@ Feature: set-product
     When I send a "POST" request to "/checkout/content/set" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
+      "productSku": "{{ normal_product.sku }}",
       "units": 0
     }
     """
@@ -27,7 +27,7 @@ Feature: set-product
     When I send a "POST" request to "/checkout/content/set" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
+      "productSku": "{{ normal_product.sku }}",
       "units": 2
     }
     """
@@ -39,7 +39,7 @@ Feature: set-product
         "lines": [
           {
             "product": {
-              "id": "{{ product_tactical_sp.id }}"              
+              "id": "{{ normal_product.id }}"              
             },
             "units": 2
           }
@@ -53,7 +53,7 @@ Feature: set-product
     """
       {
         "lines": [{
-          "productId": "{{ product_tactical_sp.id }}",
+          "productId": "{{ normal_product.id }}",
           "units": 3
         }]
       }
@@ -61,7 +61,7 @@ Feature: set-product
     When I send a "POST" request to "/checkout/content/set" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
+      "productSku": "{{ normal_product.sku }}",
       "units": 2
     }
     """
@@ -73,7 +73,7 @@ Feature: set-product
         "lines": [
           {
             "product": {
-              "id": "{{ product_tactical_sp.id }}"              
+              "id": "{{ normal_product.id }}"              
             },
             "units": 2
           }

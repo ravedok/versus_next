@@ -22,7 +22,20 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"phpGettersSetters.templatesDir": "/appdata/www/.vscode/php-getters-setters-templates-main",
-    "php.suggest.basic": false
+    	"php.suggest.basic": false,
+		"intelephense.files.exclude": [
+			"**/.git/**",
+			"**/.svn/**",
+			"**/.hg/**",
+			"**/CVS/**",
+			"**/.DS_Store/**",
+			"**/node_modules/**",
+			"**/bower_components/**",
+			"**/vendor/**/{Tests,tests}/**",
+			"**/.history/**",
+			"**/vendor/**/vendor/**",
+			"**/var/**"
+		]
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.

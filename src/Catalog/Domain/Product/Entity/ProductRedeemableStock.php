@@ -6,6 +6,7 @@ class ProductRedeemableStock
 {
     private int $stock;
     private float $cost;
+    private float $price;
     private bool $redeemable;
 
     public function __construct()
@@ -13,6 +14,7 @@ class ProductRedeemableStock
         $this->redeemable = false;
         $this->stock = 0;
         $this->cost = 0;
+        $this->price = 0;
     }
 
     public function getStock(): int
@@ -47,6 +49,18 @@ class ProductRedeemableStock
     public function setRedeemable(bool $redeemable): self
     {
         $this->redeemable = $redeemable;
+
+        return $this;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

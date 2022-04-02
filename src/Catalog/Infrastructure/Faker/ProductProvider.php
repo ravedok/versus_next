@@ -7,6 +7,7 @@ use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Catalog\Domain\Product\Entity\ProductName;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock;
+use VS\Next\Catalog\Domain\Product\Entity\ProductVirtualStock;
 
 class ProductProvider extends Base
 {
@@ -25,10 +26,19 @@ class ProductProvider extends Base
         return ProductName::fromString($name);
     }
 
-    public static function productStoredStock(int $stock, float $cost): ProductStoredStock
+    public static function productStoredStock(int $stock, float $cost, float $price): ProductStoredStock
     {
         return (new ProductStoredStock())
             ->setStock($stock)
-            ->setCost($cost);
+            ->setCost($cost)
+            ->setPrice($price);
+    }
+
+    public static function productVirtualStock(int $stock, float $cost, float $price): ProductVirtualStock
+    {
+        return (new ProductVirtualStock())
+            ->setStock($stock)
+            ->setCost($cost)
+            ->setPrice($price);
     }
 }

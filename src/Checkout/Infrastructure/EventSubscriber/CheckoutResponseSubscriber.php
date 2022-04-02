@@ -6,11 +6,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
-use VS\Next\Checkout\Infrastructure\Service\CheckoutResponseCreator;
+use VS\Next\Checkout\Infrastructure\Service\CheckoutNormalize;
 
 class CheckoutResponseSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private CheckoutResponseCreator $createCheckoutResponse)
+    public function __construct(private CheckoutNormalize $createCheckoutResponse)
     {
     }
 

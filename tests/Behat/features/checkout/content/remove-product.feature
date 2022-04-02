@@ -9,7 +9,7 @@ Feature: add-product
     When I send a "POST" request to "/checkout/content/remove" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}"
+      "productSku": "{{ normal_product.sku }}"
     }
     """
     Then the response status code should be "200"
@@ -20,7 +20,7 @@ Feature: add-product
       """
         {
           "lines": [{
-            "productId": "{{ product_tactical_sp.id }}",
+            "productId": "{{ normal_product.id }}",
             "units": 3
           }]
         }
@@ -28,7 +28,7 @@ Feature: add-product
     When I send a "POST" request to "/checkout/content/remove" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}"
+      "productSku": "{{ normal_product.sku }}"
     }
     """
     Then the response status code should be "200"

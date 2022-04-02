@@ -21,6 +21,11 @@ class RedeemableProduct extends Product
         $this->stockable = true;
     }
 
+    public function getPrice(): float
+    {
+        return $this->redeemable->getPrice();
+    }
+
     public function isRedeemable(): bool
     {
         return $this->getRedeemable()->isRedeemable();

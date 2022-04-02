@@ -189,4 +189,6 @@ abstract class Product
             throw ProductIsNotActiveException::fromProduct($this);
         }
     }
+
+    abstract public function getPrice(): float;
 }

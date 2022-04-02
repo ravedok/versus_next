@@ -27,6 +27,17 @@ class VariableProduct extends Product
         $this->variations = new ArrayCollection;
     }
 
+    public function getPrice(): float
+    {
+        return array_reduce($this->variations->toArray(), function (float $carry, VariationProduct $variation) {
+            if ($carry == 0 || $carry > $variation->getPrice()) {
+                $carry = $variation->getPrice();
+            }
+
+            return $carry;
+        }, 0);
+    }
+
     public function getAvailableStock(): int
     {
         return 0;

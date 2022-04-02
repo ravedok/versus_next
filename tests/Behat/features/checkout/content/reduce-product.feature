@@ -9,8 +9,8 @@ Feature: remove-product
     When I send a "POST" request to "/checkout/content/reduce" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
-      "units": {{ product_tactical_sp.stored.stock }}
+      "productSku": "{{ normal_product.sku }}",
+      "units": {{ normal_product.stored.stock }}
     }
     """
     Then the response status code should be "200"
@@ -28,7 +28,7 @@ Feature: remove-product
     """
       {
         "lines": [{
-          "productId": "{{ product_tactical_sp.id }}",
+          "productId": "{{ normal_product.id }}",
           "units": 3
         }]
       }
@@ -36,7 +36,7 @@ Feature: remove-product
     When I send a "POST" request to "/checkout/content/reduce" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
+      "productSku": "{{ normal_product.sku }}",
       "units": 2
     }
     """
@@ -48,7 +48,7 @@ Feature: remove-product
         "lines": [
           {
             "product": {
-              "id": "{{ product_tactical_sp.id }}"              
+              "id": "{{ normal_product.id }}"              
             },
             "units": 1
           }
@@ -62,7 +62,7 @@ Feature: remove-product
     """
       {
         "lines": [{
-          "productId": "{{ product_tactical_sp.id }}",
+          "productId": "{{ normal_product.id }}",
           "units": 1
         }]
       }
@@ -70,7 +70,7 @@ Feature: remove-product
     When I send a "POST" request to "/checkout/content/reduce" with body:
     """
     {
-      "productSku": "{{ product_tactical_sp.sku }}",
+      "productSku": "{{ normal_product.sku }}",
       "units": 1
     }
     """

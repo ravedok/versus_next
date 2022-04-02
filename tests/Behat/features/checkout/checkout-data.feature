@@ -14,7 +14,7 @@ Feature: checkout-data
       """
       {
         "lines": [{
-          "productId": "{{ product_tactical_sp.id }}",
+          "productId": "{{ normal_product.id }}",
           "units": 3
         }]
       }
@@ -28,9 +28,10 @@ Feature: checkout-data
         "lines": [
           {
             "product": {
-              "id": "{{ product_tactical_sp.id }}"              
+              "id": "{{ normal_product.id }}"
             },
-            "units": 3
+            "units": 3,
+            "total": 89.7
           }
         ]
       }

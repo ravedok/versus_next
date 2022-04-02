@@ -55,4 +55,11 @@ class Cart
 
         return null;
     }
+
+    public function getTotal(): float
+    {
+        return array_reduce($this->lines->toArray(), function (float $carry, CartLine $line) {
+            return $carry + $line->getTotal();
+        }, 0);
+    }
 }

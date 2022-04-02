@@ -40,6 +40,12 @@ trait ProductStockableTrait
         return $this->virtual;
     }
 
+    public function setVirtual(ProductVirtualStock $productVirtualStock): self
+    {
+        $this->virtual = $productVirtualStock;
+        return $this;
+    }
+
     public function getOnDemand(): ProductOnDemandStock
     {
         return $this->onDemand;
@@ -64,5 +70,14 @@ trait ProductStockableTrait
         }
 
         return 0;
+    }
+
+    public function getPrice(): float
+    {
+        if ($this->virtual->getPrice()) {
+            return $this->virtual->getPrice();
+        }
+
+        return $this->stored->getPrice();
     }
 }

@@ -5,3 +5,5 @@ VS\Next\Catalog\Domain\Product\Entity\ProductVirtualStock:
       type: integer
     cost:
       type: float
+    price:
+      type: float
