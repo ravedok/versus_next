@@ -4,6 +4,12 @@ VS\Next\Catalog\Domain\Product\NormalProduct:
     __construct: [<productId()>, <productSkuFromString('OZTACTICALSP')>, <productNameFromString('Tactical')>]
     stored: <productStoredStock(4, 10, 24.710)>
     virtual: <productVirtualStock(0,0,0)>
+  
+  normal_product_with_offer:
+    __construct: [<productId()>, <productSkuFromString('DR175CARBON')>, <productNameFromString('DR175 Black')>]
+    stored: <productStoredStock(2, 20, 140.41)>
+    virtual: <productVirtualStock(0,0,0)>
+    offer: <productOffer(true, 99.1735, <discountTypeAmount()>)>
 
 VS\Next\Catalog\Domain\Product\GiftCardProduct:
   gift_card:

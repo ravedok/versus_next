@@ -15,7 +15,10 @@ Feature: checkout-data
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
-          "units": 3
+          "units": 2
+        },{
+          "productId": "{{ normal_product_with_offer.id }}",
+          "units": 1
         }]
       }
     """
@@ -25,16 +28,21 @@ Feature: checkout-data
     """
     {
       "content": {
-        "lines": [
-          {
+        "lines": [{
             "product": {
               "id": "{{ normal_product.id }}"
             },
-            "units": 3,
-            "total": 89.7
-          }
-        ]
-      }
+            "units": 2,
+            "total": 59.8
+          },{
+            "product": {
+              "id": "{{ normal_product_with_offer.id }}"
+            },
+            "units": 1,
+            "total": 120
+          }]
+      },
+      "total": 179.8
     }
     """
 

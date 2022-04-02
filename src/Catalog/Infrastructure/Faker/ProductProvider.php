@@ -2,10 +2,13 @@
 
 namespace VS\Next\Catalog\Infrastructure\Faker;
 
+use DateTime;
 use Faker\Provider\Base;
+use VS\Next\Catalog\Domain\Product\Entity\DiscountType;
 use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Catalog\Domain\Product\Entity\ProductName;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock;
 use VS\Next\Catalog\Domain\Product\Entity\ProductVirtualStock;
 
@@ -40,5 +43,20 @@ class ProductProvider extends Base
             ->setStock($stock)
             ->setCost($cost)
             ->setPrice($price);
+    }
+
+    public static function productOffer(bool $active = false, float $price = 0, ?DiscountType $type = null, ?DateTime $start = null, ?DateTime $end = null): ProductOffer
+    {
+        return (new ProductOffer($active, $price, $type, $start, $end));
+    }
+
+    public static function discountTypeAmount(): DiscountType
+    {
+        return DiscountType::createAmount();
+    }
+
+    public static function discountTypePercent(): DiscountType
+    {
+        return DiscountType::createPercent();
     }
 }

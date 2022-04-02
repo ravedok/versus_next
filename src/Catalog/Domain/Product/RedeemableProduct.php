@@ -18,7 +18,6 @@ class RedeemableProduct extends Product
         parent::__construct($id, $sku, $name);
         $this->type = ProductType::createRedeemable();
         $this->redeemable = new ProductRedeemableStock;
-        $this->stockable = true;
     }
 
     public function getPrice(): float

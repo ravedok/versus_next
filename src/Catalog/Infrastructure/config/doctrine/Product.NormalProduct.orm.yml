@@ -7,3 +7,5 @@ VS\Next\Catalog\Domain\Product\NormalProduct:
       class: VS\Next\Catalog\Domain\Product\Entity\ProductVirtualStock
     onDemand:
       class: VS\Next\Catalog\Domain\Product\Entity\ProductOnDemandStock
+    offer:
+      class: VS\Next\Catalog\Domain\Product\Entity\ProductOffer

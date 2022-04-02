@@ -1,0 +1,15 @@
+VS\Next\Catalog\Domain\Product\Entity\ProductOffer:
+  type: embeddable
+  fields:
+    active: 
+      type: boolean
+    price:
+      type: float
+    type:
+      type: discount_type
+    start:
+      type: date
+      nullable: true
+    end:
+      type: date
+      nullable: true

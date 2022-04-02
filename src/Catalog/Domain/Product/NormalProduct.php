@@ -7,6 +7,7 @@ use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
 use VS\Next\Catalog\Domain\Product\Entity\ProductName;
 use VS\Next\Catalog\Domain\Product\Entity\ProductType;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableTrait;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStockableTrait;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStockableInterface;
 use VS\Next\Catalog\Domain\Product\Entity\ProductCustomizableStockTrait;
@@ -19,6 +20,7 @@ class NormalProduct extends Product implements ProductStockableInterface, Produc
     use ProductStockableTrait;
     use ProductReconditionedStockTrait;
     use ProductCustomizableStockTrait;
+    use ProductOfferableTrait;
 
     public function __construct(ProductId $id, ProductSku $sku, ProductName $name)
     {
@@ -27,5 +29,6 @@ class NormalProduct extends Product implements ProductStockableInterface, Produc
         $this->stockableDefaultValues();
         $this->reconditionedDefaultValues();
         $this->customizableDefaultValues();
+        $this->offerableDefaultValues();
     }
 }

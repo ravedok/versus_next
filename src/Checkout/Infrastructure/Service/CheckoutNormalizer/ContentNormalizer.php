@@ -37,11 +37,30 @@ class ContentNormalizer
                     'id' => $product->getId()->value(),
                     'sku'   => $product->getSku()->value(),
                     'name' => $product->getName()->value(),
-                    'price' => $this->amountWithVat($product->getPrice())
                 ],
+                'offer' => $this->getOfferFromLine($line),
+                'price' => $this->currencyWithVat($line->getPrice()),
                 'units' => $line->getUnits(),
-                'total' => $this->amountWithVat($line->getTotal())
+                'total' => $this->currencyWithVat($line->getTotal())
             ];
         })->toArray();
+    }
+
+    private function getOfferFromLine(CartLine $line): ?array
+    {
+        if (!$offer = $line->getAppliedOffer()) {
+            return null;
+        }
+
+        $previous = $this->addVat($line->getProduct()->getPrice());
+        $current = $this->addVat($offer->getPrice());
+        $type = $offer->getType();
+        $amount = $type->calculateAmount($previous, $current);
+
+        return [
+            'amount' => floor($amount),
+            'previous' => round($previous, 2),
+            'type' => $offer->getType()->value()
+        ];
     }
 }

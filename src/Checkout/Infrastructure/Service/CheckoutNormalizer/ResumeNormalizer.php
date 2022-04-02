@@ -20,7 +20,7 @@ class ResumeNormalizer
         $cart = $this->cartRepository->current();
 
         return [
-            'total' => $this->amountWithVat($cart->getTotal())
+            'total' => $this->currencyWithVat($cart->getTotal())
         ];
     }
 }

@@ -3,7 +3,9 @@
 namespace VS\Next\Checkout\Domain\Cart;
 
 use VS\Next\Catalog\Domain\Product\Entity\Product;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Checkout\Domain\Cart\Exception\NotEnoughStockException;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableInterface;
 
 abstract class CartLine
 {
@@ -96,8 +98,35 @@ abstract class CartLine
         return $this;
     }
 
+    public function getPrice(): float
+    {
+        if ($offer = $this->getAppliedOffer()) {
+            return $offer->getPrice();
+        }
+
+        return $this->getProduct()->getPrice();
+    }
+
+    public function getAppliedOffer(): ?ProductOffer
+    {
+        $product = $this->getProduct();
+
+        if ($product->isOfferable() === false) {
+            return null;
+        }
+
+        /** @var Product&ProductOfferableInterface $product */
+        $offer = $product->getOffer();
+
+        if (false === $offer->isApplicable()) {
+            return null;
+        }
+
+        return $product->getOffer();
+    }
+
     public function getTotal(): float
     {
-        return $this->getUnits() * $this->getProduct()->getPrice();
+        return $this->getUnits() * $this->getPrice();
     }
 }

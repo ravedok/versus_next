@@ -13,7 +13,7 @@ trait VatCalculatorTrait
         return $amount * (1 + $this->destination->getVat() / 100);
     }
 
-    public function amountWithVat(float $amount): float
+    public function currencyWithVat(float $amount): float
     {
         return round($this->addVat($amount), 2);
     }

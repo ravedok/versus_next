@@ -23,7 +23,6 @@ class VariableProduct extends Product
     {
         parent::__construct($id, $sku, $name);
         $this->type = ProductType::createVariable();
-        $this->stockable = false;
         $this->variations = new ArrayCollection;
     }
 

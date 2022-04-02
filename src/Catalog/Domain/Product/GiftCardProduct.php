@@ -14,7 +14,6 @@ class GiftCardProduct extends Product
     public function __construct(ProductId $id, ProductSku $sku, ProductName $name)
     {
         parent::__construct($id, $sku, $name);
-        $this->stockable = false;
         $this->type = ProductType::createGiftCard();
     }
 

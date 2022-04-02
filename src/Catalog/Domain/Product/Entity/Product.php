@@ -21,7 +21,6 @@ abstract class Product
     private ?Category $category;
     /** @var ArrayCollection<int, Brand> */
     private Collection $brands;
-    protected bool $stockable = true;
     private bool $allowDirectSales;
     private bool $allowPromotions;
 
@@ -41,7 +40,6 @@ abstract class Product
         $this->name = $name;
         $this->status = ProductStatus::createActive();
         $this->brands = new ArrayCollection;
-        $this->stockable = true;
         $this->allowDirectSales = true;
         $this->allowPromotions = true;
     }
@@ -169,7 +167,7 @@ abstract class Product
 
     public function isStockable(): bool
     {
-        return $this->stockable;
+        return false;
     }
 
     public function ensureIsForDirectSale(): void
@@ -191,4 +189,9 @@ abstract class Product
     }
 
     abstract public function getPrice(): float;
+
+    public function isOfferable(): bool
+    {
+        return false;
+    }
 }

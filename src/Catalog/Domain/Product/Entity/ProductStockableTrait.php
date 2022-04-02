@@ -17,13 +17,6 @@ trait ProductStockableTrait
         $this->onDemand = new ProductOnDemandStock;
     }
 
-    public function setStockable(bool $stockable): self
-    {
-        $this->stockable = $stockable;
-
-        return $this;
-    }
-
     public function getStored(): ProductStoredStock
     {
         return $this->stored;
@@ -79,5 +72,10 @@ trait ProductStockableTrait
         }
 
         return $this->stored->getPrice();
+    }
+
+    public function isStockable(): bool
+    {
+        return true;
     }
 }

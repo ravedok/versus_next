@@ -2,6 +2,7 @@ doctrine:
     dbal:
         types:
             product_id: VS\Next\Catalog\Infrastructure\Doctrine\ProductIdType
+            discount_type: VS\Next\Catalog\Infrastructure\Doctrine\DiscountTypeType
     orm:
         auto_mapping: true
         mappings:
