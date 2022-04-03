@@ -1,4 +1,4 @@
 include:
-  - ../../../fixtures/catalog/Brand.yaml
-  - ../../../fixtures/catalog/Category.yaml
-  - ../../../fixtures/catalog/Product.yaml
+  - ../../../fixtures/catalog/brand.yaml
+  - ../../../fixtures/catalog/category.yaml
+  - ../../../fixtures/catalog/product.yaml

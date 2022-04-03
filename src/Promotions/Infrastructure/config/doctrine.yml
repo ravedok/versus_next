@@ -1,0 +1,15 @@
+doctrine:
+    dbal:
+        types:
+            promotion_id: VS\Next\Promotions\Infrastructure\Doctrine\PromotionIdType
+            judgment_id: VS\Next\Promotions\Infrastructure\Doctrine\JudgmentIdType
+            profit_id: VS\Next\Promotions\Infrastructure\Doctrine\ProfitIdType
+    orm:
+        auto_mapping: true
+        mappings:
+            VSNextPromotionsBundle:
+                is_bundle: true
+                dir: 'config/doctrine'
+                type: yml
+                prefix: 'VS\Next\Promotions\Domain'
+                alias: VSNextPromotions

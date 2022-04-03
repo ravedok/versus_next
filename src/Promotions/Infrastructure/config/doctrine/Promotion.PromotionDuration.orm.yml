@@ -1,0 +1,10 @@
+VS\Next\Promotions\Domain\Promotion\PromotionDuration:
+  type: embeddable
+  fields:
+    startAt: 
+      type: datetime
+      nullable: true
+    endAt: 
+      type: datetime
+      nullable: true
+      

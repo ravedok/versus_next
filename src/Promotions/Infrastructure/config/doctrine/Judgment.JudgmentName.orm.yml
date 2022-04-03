@@ -1,0 +1,6 @@
+VS\Next\Promotions\Domain\Judgment\JudgmentName:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: name      

@@ -38,6 +38,6 @@ abstract class UuidType extends StringType
     public function convertToDatabaseValue($value, AbstractPlatform $platform): mixed
     {
         /** @var Uuid $value */
-        return $value->value();
+        return $value == null ? null : $value->value();
     }
 }

@@ -1,0 +1,26 @@
+VS\Next\Promotions\Domain\Judgment\Judgment:
+  type: entity
+  table: promotions_judgments
+  id:
+    id:
+      type: judgment_id
+      unique: true
+      id: true  
+  embedded:
+    name:
+      class: JudgmentName
+      columnPrefix: false            
+  manyToOne:
+    promotion:
+      targetEntity: VS\Next\Promotions\Domain\Promotion\Promotion
+      inversedBy: judgments      
+
+  manyToMany:
+    categories:
+      targetEntity: VS\Next\Catalog\Domain\Category\Category
+      joinTable:
+        name: promotions_judgments_categories
+  oneToOne:
+    profit:
+      targetEntity: VS\Next\Promotions\Domain\Profit\Profit
+      inversedBy: judgment

@@ -89,6 +89,18 @@
         ],
         "fixtures-load": [
             "php bin/console hautelook:fixtures:load --quiet --no-bundles"
+        ],
+        "grumphp": [
+            "clear",
+            "vendor/bin/grumphp run"
+        ],
+        "phpstan": [
+            "clear",
+            "vendor/bin/phpstan"
+        ],
+        "behat": [
+            "clear",
+            "vendor/bin/behat"
         ]
     },
     "conflict": {

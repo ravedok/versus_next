@@ -1,0 +1,22 @@
+VS\Next\Promotions\Domain\Promotion\Promotion:
+  promotion_keyboards:
+    __construct: 
+      - <promotionId()>
+      - true
+      - <promotionNameFromString("Promoción Teclados")>
+      - <promotionDuration(-1, +1)>
+
+VS\Next\Promotions\Domain\Profit\ProductPercentProfit:
+  profit_product_percent_10:
+    __construct: [<profitId()>, 10]
+
+VS\Next\Promotions\Domain\Judgment\Judgment:
+  judgment_keyboards:
+    __construct:
+      - <judgmentId()>
+      - <judgmentNameFromString('Criterio Teclados')>
+    promotion: '@promotion_keyboards'
+    profit: '@profit_product_percent_10'
+    categories:
+      - '@category_keyboards'
+

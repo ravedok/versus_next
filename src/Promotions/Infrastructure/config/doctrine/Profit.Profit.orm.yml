@@ -1,0 +1,23 @@
+VS\Next\Promotions\Domain\Profit\Profit:
+  type: entity
+  inheritanceType: SINGLE_TABLE
+  discriminatorColumn:
+    name: type
+    type: string
+    length: 20
+  discriminatorMap:
+    product_amount: VS\Next\Promotions\Domain\Profit\ProductAmountProfit
+    product_percent: VS\Next\Promotions\Domain\Profit\ProductPercentProfit
+  table: promotions_judgments_profits
+  id:
+    id:
+      type: profit_id
+      unique: true
+      id: true    
+  oneToOne:
+    judgment:
+      targetEntity: VS\Next\Promotions\Domain\Judgment\Judgment
+      mappedBy: profit     
+
+
+  

@@ -1,0 +1,22 @@
+VS\Next\Promotions\Domain\Promotion\Promotion:
+  type: entity
+  table: promotions
+  id:
+    id:
+      type: promotion_id
+      unique: true
+      id: true
+  fields:
+    active:
+      type: boolean
+  embedded:
+    name:
+      class: PromotionName
+      columnPrefix: false        
+    duration:
+      class: PromotionDuration      
+  oneToMany:
+    judgments:
+      targetEntity: promotion
+      mappedBy: VS\Next\Promotions\Domain\Judgment\Judgment
+  
