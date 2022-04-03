@@ -40,6 +40,7 @@ abstract class Product
         $this->name = $name;
         $this->status = ProductStatus::createActive();
         $this->brands = new ArrayCollection;
+        $this->category = null;
         $this->allowDirectSales = true;
         $this->allowPromotions = true;
     }

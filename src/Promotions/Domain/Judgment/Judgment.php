@@ -6,9 +6,11 @@ use Doctrine\Common\Collections\Collection;
 use VS\Next\Promotions\Domain\Profit\Profit;
 use VS\Next\Catalog\Domain\Category\Category;
 use Doctrine\Common\Collections\ArrayCollection;
+use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Judgment\JudgmentId;
 use VS\Next\Promotions\Domain\Promotion\Promotion;
 use VS\Next\Promotions\Domain\Judgment\JudgmentName;
+use VS\Next\Promotions\Domain\Shared\CalculateProfit;
 
 class Judgment
 {
@@ -83,5 +85,15 @@ class Judgment
         $this->profit = $profit;
 
         return $this;
+    }
+
+    public function applicableToCartLine(CartLine $cartLine): bool
+    {
+        return (new JudgmentToCartLineChecker($this, $cartLine))();
+    }
+
+    public function applyToCartLine(CartLine $cartLine): CalculateProfit
+    {
+        return new CalculateProfit;
     }
 }

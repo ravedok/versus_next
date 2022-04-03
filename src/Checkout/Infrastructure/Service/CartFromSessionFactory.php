@@ -32,6 +32,13 @@ class CartFromSessionFactory
             return $cart;
         }
 
+        $this->parseLines($cart, $sessionCart);
+
+        return $cart;
+    }
+
+    private function parseLines(Cart &$cart, array $sessionCart): void
+    {
         foreach ($sessionCart['lines'] as $line) {
 
             $productIdInSession = $line['productId'] ?? null;
@@ -51,7 +58,5 @@ class CartFromSessionFactory
 
             $cart->addLine($cartLine);
         }
-
-        return $cart;
     }
 }
