@@ -17,7 +17,7 @@ class VSNextPromotionsExtension extends Extension implements PrependExtensionInt
         $loader->load('hautelook_alice.yaml');
     }
 
-    /** @param array<string, mixed> $configs */
+    /** @param array<array-key, mixed> $configs */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));

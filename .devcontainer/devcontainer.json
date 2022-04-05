@@ -54,7 +54,8 @@
 		"xdebug.php-debug",
 		"gruntfuggly.todo-tree",
 		"eamodio.gitlens",
-		"marcosvfranco.cucumberautocomplete-behat"
+		"marcosvfranco.cucumberautocomplete-behat",
+		"getpsalm.psalm-vscode-plugin"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
