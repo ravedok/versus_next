@@ -1,0 +1,5 @@
+VS\Next\Promotions\Domain\Profit\Types\ProductAmountProfit:
+  type: entity
+  fields:
+    amount:
+      type: float

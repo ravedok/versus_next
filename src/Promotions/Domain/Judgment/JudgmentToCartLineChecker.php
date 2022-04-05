@@ -4,6 +4,7 @@ namespace VS\Next\Promotions\Domain\Judgment;
 
 use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Judgment\Judgment;
+use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
 
 class JudgmentToCartLineChecker
 {
@@ -26,7 +27,13 @@ class JudgmentToCartLineChecker
 
     private function isValidProfit(): bool
     {
-        if ($this->judgment->getProfit() === null) {
+        $profit = $this->judgment->getProfit();
+
+        if ($profit === null) {
+            return false;
+        }
+
+        if (!$profit instanceof LineProfitInterface) {
             return false;
         }
 

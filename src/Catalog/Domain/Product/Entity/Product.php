@@ -13,16 +13,16 @@ use VS\Next\Catalog\Domain\Product\Exception\ProductNotAllowDirectSalesException
 
 abstract class Product
 {
-    private ProductId $id;
+    protected ProductId $id;
     protected ProductType $type;
-    private ProductSku $sku;
-    private ProductStatus $status;
-    private ProductName $name;
-    private ?Category $category;
+    protected ProductSku $sku;
+    protected ProductStatus $status;
+    protected ProductName $name;
+    protected ?Category $category = null;
     /** @var ArrayCollection<int, Brand> */
-    private Collection $brands;
-    private bool $allowDirectSales;
-    private bool $allowPromotions;
+    protected Collection $brands;
+    protected bool $allowDirectSales = true;
+    protected bool $allowPromotions = true;
 
     // TODO Configuración (¿personalizaciones?)
     // TODO Tarjetas regalo
@@ -40,9 +40,8 @@ abstract class Product
         $this->name = $name;
         $this->status = ProductStatus::createActive();
         $this->brands = new ArrayCollection;
-        $this->category = null;
-        $this->allowDirectSales = true;
-        $this->allowPromotions = true;
+        // $this->allowDirectSales = true;
+        // $this->allowPromotions = true;
     }
 
     public function getId(): ProductId
@@ -83,7 +82,7 @@ abstract class Product
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategory(?Category $category): static
     {
         $this->category = $category;
 

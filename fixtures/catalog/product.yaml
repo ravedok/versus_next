@@ -9,7 +9,8 @@ VS\Next\Catalog\Domain\Product\NormalProduct:
     __construct: [<productId()>, <productSkuFromString('DR175CARBON')>, <productNameFromString('DR175 Black')>]
     stored: <productStoredStock(2, 20, 140.41)>
     virtual: <productVirtualStock(0,0,0)>
-    offer: <productOffer(true, 99.1735, <discountTypeAmount()>)>
+    offer: <productOffer(true, 132.1488, <discountTypeAmount()>)>
+    category: '@category_chairs'
 
 VS\Next\Catalog\Domain\Product\GiftCardProduct:
   gift_card:

@@ -38,7 +38,7 @@ class ContentNormalizer
                     'sku'   => $product->getSku()->value(),
                     'name' => $product->getName()->value(),
                 ],
-                'offer' => $this->getOfferFromLine($line),
+                'offer' => $this->getOfferFromDiscount($line),
                 'price' => $this->currencyWithVat($line->getPrice()),
                 'units' => $line->getUnits(),
                 'total' => $this->currencyWithVat($line->getTotal())
@@ -46,21 +46,21 @@ class ContentNormalizer
         })->toArray();
     }
 
-    private function getOfferFromLine(CartLine $line): ?array
+    private function getOfferFromDiscount(CartLine $line): ?array
     {
-        if (!$offer = $line->getAppliedOffer()) {
+        if (!$discount = $line->getAppliedDiscount()) {
             return null;
         }
 
         $previous = $this->addVat($line->getProduct()->getPrice());
-        $current = $this->addVat($offer->getPrice());
-        $type = $offer->getType();
-        $amount = $type->calculateAmount($previous, $current);
+        // $current = $this->addVat($discount->getDiscountedPrice());
+        // $type = $discount->getType();
+        $amount = $discount->getValue();
 
         return [
             'amount' => floor($amount),
             'previous' => round($previous, 2),
-            'type' => $offer->getType()->value()
+            'type' => $discount->getType()->value()
         ];
     }
 }

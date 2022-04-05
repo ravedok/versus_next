@@ -18,7 +18,7 @@ trait ProductOfferableTrait
         return $this->offer;
     }
 
-    public function setOffer(ProductOffer $offer): self
+    public function setOffer(ProductOffer $offer): static
     {
         $this->offer = $offer;
 

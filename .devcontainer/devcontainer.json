@@ -23,6 +23,7 @@
 	"settings": {
 		"phpGettersSetters.templatesDir": "/appdata/www/.vscode/php-getters-setters-templates-main",
     	"php.suggest.basic": false,
+		"phpclassgen.vendor": "VS\\Next",
 		"intelephense.files.exclude": [
 			"**/.git/**",
 			"**/.svn/**",

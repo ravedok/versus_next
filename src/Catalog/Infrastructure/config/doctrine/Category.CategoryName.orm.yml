@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Category\CategoryName:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: name      

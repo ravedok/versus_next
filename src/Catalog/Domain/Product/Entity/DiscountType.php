@@ -2,6 +2,8 @@
 
 namespace VS\Next\Catalog\Domain\Product\Entity;
 
+use VS\Next\Promotions\Domain\Shared\DiscountHelper;
+
 class DiscountType
 {
     public const PERCENT = 'PERCENT';
@@ -47,12 +49,12 @@ class DiscountType
         return new self(self::AMOUNT);
     }
 
-    public function calculateAmount(float $previous, float $current): float
+    public function calculateAmountToDiscount(float $price, float $value): float
     {
-        if ($this->value === self::AMOUNT) {
-            return $previous - $current;
+        if ($this->isAmount()) {
+            return $value;
         }
 
-        return (1 - ($current / $previous)) * 100;
+        return DiscountHelper::calculateDiscountedAmount($price, $value);
     }
 }

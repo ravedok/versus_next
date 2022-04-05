@@ -2,15 +2,17 @@
 
 namespace VS\Next\Promotions\Domain\Judgment;
 
+use InvalidArgumentException;
+use VS\Next\Checkout\Domain\Cart\CartLine;
 use Doctrine\Common\Collections\Collection;
 use VS\Next\Promotions\Domain\Profit\Profit;
 use VS\Next\Catalog\Domain\Category\Category;
 use Doctrine\Common\Collections\ArrayCollection;
-use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Judgment\JudgmentId;
 use VS\Next\Promotions\Domain\Promotion\Promotion;
 use VS\Next\Promotions\Domain\Judgment\JudgmentName;
-use VS\Next\Promotions\Domain\Shared\CalculateProfit;
+use VS\Next\Promotions\Domain\Shared\CalculatedDiscount;
+use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
 
 class Judgment
 {
@@ -82,6 +84,10 @@ class Judgment
 
     public function setProfit(?Profit $profit): self
     {
+        if ($profit) {
+            $profit->setJudgment($this);
+        }
+
         $this->profit = $profit;
 
         return $this;
@@ -92,8 +98,15 @@ class Judgment
         return (new JudgmentToCartLineChecker($this, $cartLine))();
     }
 
-    public function applyToCartLine(CartLine $cartLine): CalculateProfit
+    public function applyToCartLine(CartLine $cartLine): CalculatedDiscount
     {
-        return new CalculateProfit;
+        if ($this->getProfit() === null) {
+            throw new InvalidArgumentException('The criteria does not include a benefit');
+        }
+
+        /** @var Profit&LineProfitInterface */
+        $profit = $this->getProfit();
+
+        return $profit->calculateProfitToCartLine($cartLine);
     }
 }

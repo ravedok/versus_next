@@ -100,7 +100,11 @@
         ],
         "behat": [
             "clear",
-            "vendor/bin/behat"
+            "vendor/bin/behat --rerun"
+        ],
+        "phpunit": [
+            "clear",
+            "vendor/bin/phpunit"
         ]
     },
     "conflict": {

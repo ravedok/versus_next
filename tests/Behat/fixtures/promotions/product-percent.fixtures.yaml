@@ -1,0 +1,26 @@
+include:
+  - ../global-fixtures.yaml
+  - ../../../../fixtures/promotions/promotion.yaml
+
+VS\Next\Promotions\Domain\Promotion\Promotion:
+  promotion_product_percent_20:
+    __construct: 
+      - <promotionId()>
+      - true
+      - <promotionNameFromString("Descuento a Producto 20%")>
+      - <promotionDuration(-1, +1)>
+
+VS\Next\Promotions\Domain\Profit\Types\ProductPercentProfit:
+  profit_product_percent_20:
+    __construct: [<profitId()>, 20]
+
+VS\Next\Promotions\Domain\Judgment\Judgment:
+  judgment_product_percent_20:
+    __construct:
+      - <judgmentId()>
+      - <judgmentNameFromString('Criterio Descuento a Sillas 20%')>
+    promotion: '@promotion_product_percent_20'
+    profit: '@profit_product_percent_20'
+    categories:
+      - '@category_chairs'
+

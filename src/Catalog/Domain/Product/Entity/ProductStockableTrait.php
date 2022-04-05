@@ -22,7 +22,7 @@ trait ProductStockableTrait
         return $this->stored;
     }
 
-    public function setStored(ProductStoredStock $productStoredStock): self
+    public function setStored(ProductStoredStock $productStoredStock): static
     {
         $this->stored = $productStoredStock;
         return $this;

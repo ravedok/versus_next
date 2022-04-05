@@ -31,3 +31,7 @@ VS\Next\Catalog\Domain\Product\Entity\Product:
     status:
       class: VS\Next\Catalog\Domain\Product\Entity\ProductStatus
       columnPrefix: false    
+  manyToOne:
+    category:
+      targetEntity: VS\Next\Catalog\Domain\Category\Category
+

@@ -2,17 +2,17 @@
 
 namespace VS\Next\Tests\PHPUnit\Promotions\Domain\Profit;
 
-use VS\Next\Promotions\Domain\Profit\ProductPercentProfit;
+use VS\Next\Promotions\Domain\Profit\Types\ProductPercentProfit;
 use VS\Next\Promotions\Domain\Profit\ProfitId;
 
 class ProductPercentProfitMother
 {
 
-    public static function get(): ProductPercentProfit
+    public static function get(float $percent = null): ProductPercentProfit
     {
         return new ProductPercentProfit(
             ProfitId::random(),
-            self::randomPercent()
+            $percent ?: self::randomPercent()
         );
     }
 

@@ -12,3 +12,8 @@ services:
     VS\Next\Promotions\Infrastructure\:
         resource: "../../Infrastructure/"
 
+    VS\Next\Promotions\Domain\Promotion\Services\ApplyPromotionsToCart: ~ 
+
+    VS\Next\Promotions\Domain\Judgment\JudgmentRepository:
+        class: VS\Next\Promotions\Infrastructure\Repository\JudgmentDoctrineRepository
+

@@ -39,10 +39,10 @@ Feature: checkout-data
               "id": "{{ normal_product_with_offer.id }}"
             },
             "units": 1,
-            "total": 120
+            "total": 162.78
           }]
       },
-      "total": 179.8
+      "total": 222.58
     }
     """
 

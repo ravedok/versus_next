@@ -1,5 +1,0 @@
-VS\Next\Promotions\Domain\Profit\ProductPercentProfit:
-  type: entity
-  fields:
-    percent:
-      type: float

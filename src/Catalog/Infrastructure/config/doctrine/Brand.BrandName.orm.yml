@@ -1,0 +1,6 @@
+VS\Next\Catalog\Domain\Brand\BrandName:
+  type: embeddable
+  fields:
+    value: 
+      type: string
+      column: name      

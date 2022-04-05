@@ -3,10 +3,10 @@ VS\Next\Catalog\Domain\Category\Category:
   table: categories  
   id:
     id:
-      type: uuid
+      type: category_id
       unique: true
       id: true
-  fields:
+  embedded:
     name:
-      type: string
-      length: 30        
+      class: VS\Next\Catalog\Domain\Category\CategoryName      
+      columnPrefix: false

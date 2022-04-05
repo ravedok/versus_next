@@ -6,7 +6,7 @@ VS\Next\Catalog\Domain\Brand\Brand:
       type: uuid
       unique: true
       id: true
-  fields:
+  embedded:
     name:
-      type: string
-      length: 30        
+      class: VS\Next\Catalog\Domain\Brand\BrandName      
+      columnPrefix: false
