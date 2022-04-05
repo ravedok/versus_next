@@ -1,0 +1,5 @@
+VS\Next\Promotions\Domain\Profit\Types\CartAmountDiscountProfit:
+  type: entity
+  fields:
+    amount:
+      type: float

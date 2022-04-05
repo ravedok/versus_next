@@ -57,8 +57,12 @@ class ContentNormalizer
         // $type = $discount->getType();
         $amount = $discount->getValue();
 
+        if ($discount->getType()->isAmount()) {
+            $amount = $this->currencyWithVat($amount);
+        }
+
         return [
-            'amount' => floor($amount),
+            'amount' => $amount,
             'previous' => round($previous, 2),
             'type' => $discount->getType()->value()
         ];

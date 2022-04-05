@@ -6,7 +6,7 @@ use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Checkout\Domain\Cart\Exception\NotEnoughStockException;
 use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableInterface;
-use VS\Next\Promotions\Domain\Shared\CalculatedDiscount;
+use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 
 abstract class CartLine
 {
@@ -14,7 +14,7 @@ abstract class CartLine
     protected CartLineType $type;
     protected Product $product;
     private int $units = 0;
-    protected ?CalculatedDiscount $appliedDiscount = null;
+    protected ?CalculatedLineDiscount $appliedDiscount = null;
 
     public function __construct(
         Product $product,
@@ -109,7 +109,7 @@ abstract class CartLine
         return $this->getProduct()->getPrice();
     }
 
-    public function setAppliedDiscount(?CalculatedDiscount $calculatedDiscount): self
+    public function setAppliedDiscount(?CalculatedLineDiscount $calculatedDiscount): self
     {
         $this->appliedDiscount = $calculatedDiscount;
 
@@ -118,7 +118,7 @@ abstract class CartLine
 
 
 
-    public function getAppliedDiscount(): ?CalculatedDiscount
+    public function getAppliedDiscount(): ?CalculatedLineDiscount
     {
         return $this->appliedDiscount;
     }

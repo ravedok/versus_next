@@ -3,57 +3,45 @@
 namespace VS\Next\Promotions\Domain\Promotion\Services;
 
 use VS\Next\Checkout\Domain\Cart\Cart;
-use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Judgment\Judgment;
-use VS\Next\Catalog\Domain\Product\Entity\Product;
-use VS\Next\Promotions\Domain\Shared\CalculatedDiscount;
 use VS\Next\Promotions\Domain\Judgment\JudgmentRepository;
-use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableInterface;
-use VS\Next\Promotions\Domain\Shared\DiscountHelper;
+use VS\Next\Promotions\Domain\Shared\CalculatedCartDiscount;
 
 class ApplyPromotionsToCart
 {
-    public function __construct(private JudgmentRepository $judgmentRepository)
-    {
+    public function __construct(
+        private JudgmentRepository $judgmentRepository,
+        private ApplyPromotionsToCartLine $applyPromotionsToCartLine
+    ) {
     }
     public function __invoke(Cart $cart): void
     {
         $judgments = $this->judgmentRepository->findActives();
 
-        $this->applyToLines($judgments, $cart->getLines()->toArray());
+        $this->applyToLines($judgments, $cart);
+
+        $this->applyToCart($judgments, $cart);
     }
 
-    /** 
-     * @param Judgment[] $judgments 
-     * @param CartLine[] $lines
-     * */
-    private function applyToLines(array $judgments, array $lines): void
-    {
-        foreach ($lines as $line) {
-            if (!$line->getProduct()->isAllowPromotions()) {
-                continue;
-            }
-
-            $this->applyToLine($judgments, $line);
-        }
-    }
-
-    /** @param Judgment[] $judgments  */
-    private function applyToLine(array $judgments, CartLine $cartLine): void
+    /** @param Judgment[] $judgments */
+    private function applyToCart(array $judgments, Cart $cart): void
     {
         $candidates = [];
 
-        $this->recoveryDiscountFromProductOffer($candidates, $cartLine);
-        $this->recoveryDiscountsFromJudgments($candidates, $cartLine, $judgments);
-        $discount = $this->reduceCandidates($candidates);
+        foreach ($judgments as $judgment) {
+            if ($judgment->isApplicableToCart($cart)) {
+                $candidates[] = $judgment->applyToCart($cart);
+            }
+        }
 
-        $cartLine->setAppliedDiscount($discount);
+        $discount = $this->reduceCandidates($candidates);
+        $cart->setAppliedDiscount($discount);
     }
 
-    /** @param CalculatedDiscount[] $candidates */
-    private function reduceCandidates(array $candidates): ?CalculatedDiscount
+    /** @param CalculatedCartDiscount[] $candidates */
+    private function reduceCandidates(array $candidates): ?CalculatedCartDiscount
     {
-        return array_reduce($candidates, function (?CalculatedDiscount $carry, CalculatedDiscount $current) {
+        return array_reduce($candidates, function (?CalculatedCartDiscount $carry, CalculatedCartDiscount $current) {
             if ($carry === null) {
                 return $current;
             }
@@ -66,43 +54,13 @@ class ApplyPromotionsToCart
         }, null);
     }
 
-    /**
-     * @param CalculatedDiscount[] $candidates
+    /** 
      * @param Judgment[] $judgments 
      * */
-    private function recoveryDiscountsFromJudgments(array &$candidates, CartLine $cartLine, array $judgments): void
+    private function applyToLines(array $judgments, Cart $cart): void
     {
-        foreach ($judgments as $judgment) {
-            if ($judgment->applicableToCartLine($cartLine)) {
-                $candidates[] = $judgment->applyToCartLine($cartLine);
-            }
+        foreach ($cart->getLines() as $line) {
+            ($this->applyPromotionsToCartLine)($judgments, $line);
         }
-    }
-
-    /**
-     * @param CalculatedDiscount[] $candidates
-     */
-    private function recoveryDiscountFromProductOffer(array &$candidates, CartLine $cartLine): void
-    {
-        $product = $cartLine->getProduct();
-
-        if ($product->isOfferable() === false) {
-            return;
-        }
-
-        /** @var Product&ProductOfferableInterface $product */
-        $offer = $product->getOffer();
-
-        if (false === $offer->isApplicable()) {
-            return;
-        }
-
-        $discount = new CalculatedDiscount(
-            $product,
-            $offer->getType(),
-            DiscountHelper::calculateDiscountPercent($product->getPrice(), $offer->getPrice())
-        );
-
-        $candidates[] = $discount;
     }
 }

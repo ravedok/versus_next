@@ -2,12 +2,13 @@
 
 namespace VS\Next\Tests\PHPUnit\Promotions\Domain\Profit;
 
-use VS\Next\Promotions\Domain\Profit\Types\CartAmountDiscount;
+use VS\Next\Promotions\Domain\Profit\ProfitId;
+use VS\Next\Promotions\Domain\Profit\Types\CartAmountDiscountProfit;
 
 class CartAmountDiscountMother
 {
-    public static function get(): CartAmountDiscount
+    public static function get(): CartAmountDiscountProfit
     {
-        return new CartAmountDiscount();
+        return new CartAmountDiscountProfit(ProfitId::random(), 10);
     }
 }

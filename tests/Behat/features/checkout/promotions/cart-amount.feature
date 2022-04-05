@@ -1,9 +1,9 @@
-Feature: promotion-product-amount
+Feature: promotion-cart-amount
   As a user anonymous
-  I want to check that the amount discount promotions are applied correctly to the product
+  I want to check that the amount discount promotions are applied correctly to the cart
 
   Background:
-    Given the fixtures file "promotions/product-amount.fixtures.yaml" is loaded
+    Given the fixtures file "promotions/cart-amount.fixtures.yaml" is loaded
   
   Scenario: Check apply promotions
     Given The session variable "cart" contain:
@@ -27,15 +27,16 @@ Feature: promotion-product-amount
               "id": "{{ normal_product_with_offer.id }}"             
             },
             "offer": {
-              "amount": 18.15,
+              "amount": 7.12,
               "previous": 169.9,
               "type": "AMOUNT"
             },
             "units": 2,
-            "price": 151.75,
-            "total": 303.49
+            "price": 162.78,
+            "total": 325.55
           }
         ]
-      }
+      },
+      "total": 295.56
     }
     """

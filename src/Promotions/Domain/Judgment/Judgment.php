@@ -3,6 +3,7 @@
 namespace VS\Next\Promotions\Domain\Judgment;
 
 use InvalidArgumentException;
+use VS\Next\Checkout\Domain\Cart\Cart;
 use VS\Next\Checkout\Domain\Cart\CartLine;
 use Doctrine\Common\Collections\Collection;
 use VS\Next\Promotions\Domain\Profit\Profit;
@@ -11,8 +12,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use VS\Next\Promotions\Domain\Judgment\JudgmentId;
 use VS\Next\Promotions\Domain\Promotion\Promotion;
 use VS\Next\Promotions\Domain\Judgment\JudgmentName;
-use VS\Next\Promotions\Domain\Shared\CalculatedDiscount;
+use VS\Next\Promotions\Domain\Profit\CartProfitInterface;
+use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
+use VS\Next\Promotions\Domain\Shared\CalculatedCartDiscount;
 
 class Judgment
 {
@@ -93,12 +96,29 @@ class Judgment
         return $this;
     }
 
-    public function applicableToCartLine(CartLine $cartLine): bool
+    public function isApplicableToCart(Cart $cart): bool
+    {
+        return (new JudgmentToCartChecker($this, $cart))();
+    }
+
+    public function applyToCart(Cart $cart): CalculatedCartDiscount
+    {
+        if ($this->getProfit() === null) {
+            throw new InvalidArgumentException('The criteria does not include a benefit');
+        }
+
+        /** @var Profit&CartProfitInterface */
+        $profit = $this->getProfit();
+
+        return $profit->calculateProfitToCart($cart);
+    }
+
+    public function isApplicableToCartLine(CartLine $cartLine): bool
     {
         return (new JudgmentToCartLineChecker($this, $cartLine))();
     }
 
-    public function applyToCartLine(CartLine $cartLine): CalculatedDiscount
+    public function applyToCartLine(CartLine $cartLine): CalculatedLineDiscount
     {
         if ($this->getProfit() === null) {
             throw new InvalidArgumentException('The criteria does not include a benefit');

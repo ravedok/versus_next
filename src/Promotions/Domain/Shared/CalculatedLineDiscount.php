@@ -6,7 +6,7 @@ use VS\Next\Promotions\Domain\Judgment\Judgment;
 use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Catalog\Domain\Product\Entity\DiscountType;
 
-class CalculatedDiscount
+class CalculatedLineDiscount
 {
     public function __construct(
         private Product $product,

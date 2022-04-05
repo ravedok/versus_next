@@ -5,11 +5,13 @@ namespace VS\Next\Tests\PHPUnit\Catalog\Domain\Product;
 
 use Ramsey\Uuid\UuidInterface;
 use Ramsey\Uuid\Nonstandard\Uuid;
+use VS\Next\Catalog\Domain\Category\Category;
 use VS\Next\Catalog\Domain\Product\NormalProduct;
 use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Catalog\Domain\Product\Entity\ProductId;
-use VS\Next\Catalog\Domain\Product\Entity\ProductName;
 use VS\Next\Catalog\Domain\Product\Entity\ProductSku;
+use VS\Next\Catalog\Domain\Product\Entity\ProductName;
+use VS\Next\Tests\PHPUnit\Catalog\Domain\Category\CategoryMother;
 
 class ProductMother
 {
@@ -17,11 +19,16 @@ class ProductMother
     public const NORMAL_SKU = 'NORMAL';
     public const VARIABLE_SKU = 'VARIABLE##XL';
 
-    public static function get(?string $id = null, ?string $sku = self::NORMAL_SKU): NormalProduct
-    {
+    public static function get(
+        ?string $id = null,
+        ?string $sku = self::NORMAL_SKU,
+        ?Category $category = null
+    ): NormalProduct {
         $productId = $id === null ? ProductId::random() : ProductId::fromString($id);
         if ($id === null) {
         }
+
+        $category = $category ?: CategoryMother::get();
 
         $product =  (new NormalProduct(
             $productId,
@@ -32,6 +39,8 @@ class ProductMother
         $product->getStored()->setStock(5);
         $product->getReconditioned()->setStock(2);
         // $product->getCustomizable()->setCustomizable(true);
+
+        $product->setCategory($category);
 
         return $product;
     }

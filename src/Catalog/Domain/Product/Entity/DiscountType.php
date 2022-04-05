@@ -6,8 +6,8 @@ use VS\Next\Promotions\Domain\Shared\DiscountHelper;
 
 class DiscountType
 {
-    public const PERCENT = 'PERCENT';
-    public const AMOUNT = 'AMOUNT';
+    private const PERCENT = 'PERCENT';
+    private const AMOUNT = 'AMOUNT';
 
     public const VALUES = [
         self::PERCENT,

@@ -6,7 +6,7 @@ use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Profit\Profit;
 use VS\Next\Promotions\Domain\Profit\ProfitId;
 use VS\Next\Catalog\Domain\Product\Entity\DiscountType;
-use VS\Next\Promotions\Domain\Shared\CalculatedDiscount;
+use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
 
 class ProductPercentProfit extends Profit implements LineProfitInterface
@@ -15,11 +15,11 @@ class ProductPercentProfit extends Profit implements LineProfitInterface
     {
     }
 
-    public function calculateProfitToCartLine(CartLine $cartLine): CalculatedDiscount
+    public function calculateProfitToCartLine(CartLine $cartLine): CalculatedLineDiscount
     {
         $product = $cartLine->getProduct();
 
-        return new CalculatedDiscount(
+        return new CalculatedLineDiscount(
             $product,
             DiscountType::createPercent(),
             $this->percent,

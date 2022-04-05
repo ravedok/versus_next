@@ -18,6 +18,10 @@ class JudgmentToCartLineChecker
             return false;
         }
 
+        if (!$this->isValidProduct()) {
+            return false;
+        }
+
         if (!$this->isValidCategory()) {
             return false;
         }
@@ -38,6 +42,11 @@ class JudgmentToCartLineChecker
         }
 
         return true;
+    }
+
+    private function isValidProduct(): bool
+    {
+        return $this->cartline->getProduct()->isAllowPromotions();
     }
 
     private function isValidCategory(): bool

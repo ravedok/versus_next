@@ -8,6 +8,7 @@ VS\Next\Promotions\Domain\Profit\Profit:
   discriminatorMap:
     product_amount: VS\Next\Promotions\Domain\Profit\Types\ProductAmountProfit
     product_percent: VS\Next\Promotions\Domain\Profit\Types\ProductPercentProfit
+    cart_amount: VS\Next\Promotions\Domain\Profit\Types\CartAmountDiscountProfit
   table: promotions_judgments_profits
   id:
     id:

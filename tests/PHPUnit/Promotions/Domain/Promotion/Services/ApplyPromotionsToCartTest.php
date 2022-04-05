@@ -3,9 +3,9 @@
 namespace VS\Next\Tests\PHPUnit\Promotions\Domain\Promotion\Services;
 
 use PHPUnit\Framework\TestCase;
-use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Checkout\Domain\Cart\Cart;
 use VS\Next\Promotions\Domain\Judgment\Judgment;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Promotions\Domain\Judgment\JudgmentRepository;
 use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\CartMother;
 use VS\Next\Catalog\Domain\Product\Entity\ProductStoredStock;
@@ -14,6 +14,7 @@ use VS\Next\Tests\PHPUnit\Catalog\Domain\Category\CategoryMother;
 use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\NormalCartLineMother;
 use VS\Next\Tests\PHPUnit\Promotions\Domain\Judgment\JudgmentMother;
 use VS\Next\Promotions\Domain\Promotion\Services\ApplyPromotionsToCart;
+use VS\Next\Promotions\Domain\Promotion\Services\ApplyPromotionsToCartLine;
 use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\ProductAmountProfitMother;
 use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\ProductPercentProfitMother;
 
@@ -54,7 +55,10 @@ class ApplyPromotionsToCartTest extends TestCase
     /** @param Judgment[] $judgments */
     private function getApplyPromotionsToCart(array $judgments): ApplyPromotionsToCart
     {
-        return new ApplyPromotionsToCart($this->getJudgmentRepository($judgments));
+        return new ApplyPromotionsToCart(
+            $this->getJudgmentRepository($judgments),
+            new ApplyPromotionsToCartLine()
+        );
     }
 
     /** @param Judgment[] $judgments */
