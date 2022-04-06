@@ -18,7 +18,7 @@ class CartLineOptionDto
         return $this->productSku;
     }
 
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -26,5 +26,5 @@ class CartLineOptionDto
     public function getUnits(): int
     {
         return $this->units;
-    }    
+    }
 }

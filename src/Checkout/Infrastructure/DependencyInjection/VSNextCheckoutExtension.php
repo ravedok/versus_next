@@ -17,7 +17,7 @@ class VSNextCheckoutExtension extends Extension implements PrependExtensionInter
         $loader->load('messenger.yaml');
     }
 
-    /** @param array<string, string> $configs */
+    /** @param array<array-key, mixed> $configs */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../config'));

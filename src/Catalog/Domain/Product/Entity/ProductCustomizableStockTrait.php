@@ -4,6 +4,7 @@ namespace VS\Next\Catalog\Domain\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use VS\Next\Catalog\Domain\Product\Entity\ProductOption;
 
 trait ProductCustomizableStockTrait
 {
@@ -22,7 +23,7 @@ trait ProductCustomizableStockTrait
         return $this->customizable;
     }
 
-    /** @retun Collection<int, Option> */
+    /** @return Collection<int, ProductOption> */
     public function getOptions(): Collection
     {
         return $this->options;
