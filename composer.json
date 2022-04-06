@@ -44,7 +44,8 @@
         "symfony/twig-bundle": "6.0.*",
         "symfony/web-profiler-bundle": "6.0.*",
         "twig/twig": "^3.3",
-        "vimeo/psalm": "^4.22"
+        "vimeo/psalm": "^4.22",
+        "weirdan/doctrine-psalm-plugin": "^2.3"
     },
     "config": {
         "allow-plugins": {

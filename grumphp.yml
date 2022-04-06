@@ -4,3 +4,4 @@ grumphp:
             use_grumphp_paths: false
         phpunit: ~ 
         behat: ~
+        psalm: ~ 

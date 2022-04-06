@@ -12,6 +12,6 @@ class ProductVariationParentIsNotActiveException extends DomainException
 
     public static function fromProduct(VariationProduct $variationProduct): self
     {
-        return new self(sprintf('El producto "%s" no está activo.', $variationProduct->getParent()->getSku()));
+        return new self(sprintf('El producto "%s" no está activo.', $variationProduct->getParent()->getSku()->value()));
     }
 }

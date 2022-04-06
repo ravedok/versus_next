@@ -13,7 +13,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class CartDoctrineRepository extends ServiceEntityRepository implements CartRepository
 {
-    private Cart $cart;
+    private ?Cart $cart = null;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -26,7 +26,7 @@ class CartDoctrineRepository extends ServiceEntityRepository implements CartRepo
 
     public function current(): Cart
     {
-        if (!isset($this->cart)) {
+        if ($this->cart === null) {
             $this->cart = $this->fromSession();
         }
 

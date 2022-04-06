@@ -9,6 +9,6 @@ class ProductIsNotActiveException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('El producto con sku "%s" no está activo.', $product->getSku()));
+        return new self(sprintf('El producto con sku "%s" no está activo.', $product->getSku()->value()));
     }
 }

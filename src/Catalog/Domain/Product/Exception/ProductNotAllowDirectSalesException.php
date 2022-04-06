@@ -9,6 +9,6 @@ class ProductNotAllowDirectSalesException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('El producto con sku "%s" no permite venta directa.', $product->getSku()));
+        return new self(sprintf('El producto con sku "%s" no permite venta directa.', $product->getSku()->value()));
     }
 }

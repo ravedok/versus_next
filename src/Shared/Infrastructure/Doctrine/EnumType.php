@@ -16,7 +16,7 @@ abstract class EnumType extends StringType
     public static function customTypeName(): string
     {
         $classNameFragments = explode('\\', static::class);
-        return u(str_replace('Type', '', end($classNameFragments)))->camel();
+        return u(str_replace('Type', '', end($classNameFragments)))->camel()->toString();
     }
 
     public function getName(): string

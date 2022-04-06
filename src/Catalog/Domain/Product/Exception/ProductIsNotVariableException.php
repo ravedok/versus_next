@@ -12,7 +12,7 @@ class ProductIsNotVariableException extends DomainException
 
     public function __construct(Product $product)
     {
-        $sku = $product->getSku();
+        $sku = $product->getSku()->value();
         parent::__construct(sprintf("El producto con sku '%s' no es variable.", $sku));
     }
 }

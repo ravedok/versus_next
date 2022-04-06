@@ -9,6 +9,6 @@ class ProductVariableCannotBeAnProductOptionException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('Un producto variable "%s" no puede ser una opción de un producto.', $product->getSku()));
+        return new self(sprintf('Un producto variable "%s" no puede ser una opción de un producto.', $product->getSku()->value()));
     }
 }

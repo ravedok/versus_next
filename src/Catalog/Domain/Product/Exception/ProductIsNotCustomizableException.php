@@ -9,6 +9,6 @@ class ProductIsNotCustomizableException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('El producto "%s" no es personalizable.', $product->getSku()));
+        return new self(sprintf('El producto "%s" no es personalizable.', $product->getSku()->value()));
     }
 }

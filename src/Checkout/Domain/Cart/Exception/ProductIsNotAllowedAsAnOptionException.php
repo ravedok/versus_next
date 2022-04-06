@@ -9,6 +9,6 @@ class ProductIsNotAllowedAsAnOptionException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('El producto "%s" no puede ser usado como una opción de personalización.', $product->getSku()));
+        return new self(sprintf('El producto "%s" no puede ser usado como una opción de personalización.', $product->getSku()->value()));
     }
 }

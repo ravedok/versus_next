@@ -10,7 +10,7 @@ use VS\Next\Checkout\Infrastructure\Service\SaveCartInSessionService;
 
 class CartSessionRepository implements CartRepository
 {
-    private Cart $cart;
+    private ?Cart $cart = null;
 
     public function __construct(
         private CartFromSessionFactory $cartFromSessionFactory,
@@ -26,7 +26,7 @@ class CartSessionRepository implements CartRepository
 
     public function current(): Cart
     {
-        if (!isset($this->cart)) {
+        if ($this->cart === null) {
             $this->cart = ($this->cartFromSessionFactory)();
         }
 

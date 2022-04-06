@@ -9,6 +9,6 @@ class ProductNotAllowRencoditionedStockException extends DomainException
 {
     public static function fromProduct(Product $product): self
     {
-        return new self(sprintf('El producto "%s" no admite stock reacondicionado.', $product->getSku()));
+        return new self(sprintf('El producto "%s" no admite stock reacondicionado.', $product->getSku()->value()));
     }
 }
