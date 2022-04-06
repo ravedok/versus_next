@@ -1,0 +1,5 @@
+VS\Next\Promotions\Domain\Profit\Types\CartPercentDiscountProfit:
+  type: entity
+  fields:
+    percent:
+      type: float

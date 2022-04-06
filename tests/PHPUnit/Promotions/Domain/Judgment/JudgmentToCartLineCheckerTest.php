@@ -12,7 +12,7 @@ use VS\Next\Tests\PHPUnit\Catalog\Domain\Product\ProductMother;
 use VS\Next\Promotions\Domain\Judgment\JudgmentToCartLineChecker;
 use VS\Next\Tests\PHPUnit\Catalog\Domain\Category\CategoryMother;
 use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\NormalCartLineMother;
-use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\CartAmountDiscountMother;
+use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\CartAmountDiscountProfitMother;
 use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\ProductPercentProfitMother;
 
 class JudgmentToCartLineCheckerTest extends TestCase
@@ -59,7 +59,7 @@ class JudgmentToCartLineCheckerTest extends TestCase
 
     public function test_profit_does_not_affect_a_line_fail(): void
     {
-        $profit = CartAmountDiscountMother::get();
+        $profit = CartAmountDiscountProfitMother::get();
         $judgment = $this->getJudgment(profit: $profit);
         $cartLine = $this->getCartLine();
 

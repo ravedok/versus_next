@@ -11,7 +11,7 @@ use VS\Next\Promotions\Domain\Profit\Profit;
 use VS\Next\Tests\PHPUnit\Catalog\Domain\Category\CategoryMother;
 use VS\Next\Tests\PHPUnit\Catalog\Domain\Product\ProductMother;
 use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\NormalCartLineMother;
-use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\CartAmountDiscountMother;
+use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\CartAmountDiscountProfitMother;
 use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\ProductAmountProfitMother;
 
 class JudgmentToCartCheckerTest extends TestCase
@@ -67,7 +67,7 @@ class JudgmentToCartCheckerTest extends TestCase
 
     private function getJudgment(Profit $profit = null): Judgment
     {
-        $profit = $profit ?: CartAmountDiscountMother::get();
+        $profit = $profit ?: CartAmountDiscountProfitMother::get();
 
         return JudgmentMother::get($profit);
     }
