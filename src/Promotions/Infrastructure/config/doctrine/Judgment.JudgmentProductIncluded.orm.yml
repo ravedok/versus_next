@@ -1,0 +1,17 @@
+VS\Next\Promotions\Domain\Judgment\JudgmentProductIncluded:
+  type: entity
+  table: promotions_judgments_products_included
+  id:
+    id:
+      type: uuid
+      unique: true
+      id: true  
+  fields:
+    group:
+      type: integer
+  manyToOne:
+    judgment:
+      targetEntity: VS\Next\Promotions\Domain\Judgment\Judgment
+      inversedBy: productsIncluded      
+    product:
+      targetEntity: VS\Next\Catalog\Domain\Product\Entity\Product

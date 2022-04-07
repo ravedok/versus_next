@@ -10,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use VS\Next\Promotions\Domain\Profit\Profit;
 use VS\Next\Catalog\Domain\Category\Category;
 use Doctrine\Common\Collections\ArrayCollection;
+use Ramsey\Uuid\Uuid;
+use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Promotions\Domain\Judgment\JudgmentId;
 use VS\Next\Promotions\Domain\Promotion\Promotion;
 use VS\Next\Promotions\Domain\Judgment\JudgmentName;
@@ -17,6 +19,7 @@ use VS\Next\Promotions\Domain\Profit\CartProfitInterface;
 use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
 use VS\Next\Promotions\Domain\Shared\CalculatedCartDiscount;
 use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
+use VS\Next\Promotions\Domain\Judgment\JudgmentProductIncluded;
 
 class Judgment
 {
@@ -26,6 +29,8 @@ class Judgment
     /** @var Collection<int, Brand> */
     private Collection $brands;
     private ?Profit $profit = null;
+    /** @var Collection<int, JudgmentProductIncluded> */
+    private Collection $productsIncluded;
 
     public function __construct(
         private JudgmentId $id,
@@ -33,6 +38,7 @@ class Judgment
     ) {
         $this->categories = new ArrayCollection();
         $this->brands = new ArrayCollection();
+        $this->productsIncluded = new ArrayCollection();
     }
 
     public function setPromotion(Promotion $promotion): self
@@ -125,6 +131,28 @@ class Judgment
         $this->profit = $profit;
 
         return $this;
+    }
+
+    public function addProductIncluded(Product $product, int $group): self
+    {
+        $productIncluded = new JudgmentProductIncluded(Uuid::uuid4(), $this,  $product, $group);
+
+        $this->productsIncluded->add($productIncluded);
+
+        return $this;
+    }
+
+    public function removeProductIncluded(JudgmentProductIncluded $productIncluded): self
+    {
+        $this->productsIncluded->removeElement($productIncluded);
+
+        return $this;
+    }
+
+    /** @return Collection<int, JudgmentProductIncluded> */
+    public function getProductsIncluded(): Collection
+    {
+        return $this->productsIncluded;
     }
 
     public function isApplicableToCart(Cart $cart): bool

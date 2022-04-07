@@ -29,3 +29,8 @@ VS\Next\Promotions\Domain\Judgment\Judgment:
     profit:
       targetEntity: VS\Next\Promotions\Domain\Profit\Profit
       inversedBy: judgment
+
+  oneToMany:
+    productsIncluded:
+      targetEntity: VS\Next\Promotions\Domain\Judgment\JudgmentProductIncluded
+      mappedBy: judgment
