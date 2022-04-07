@@ -10,6 +10,7 @@ VS\Next\Promotions\Domain\Profit\Profit:
     product_percent: VS\Next\Promotions\Domain\Profit\Types\ProductPercentProfit
     cart_amount: VS\Next\Promotions\Domain\Profit\Types\CartAmountDiscountProfit
     cart_percent: VS\Next\Promotions\Domain\Profit\Types\CartPercentDiscountProfit
+    cheapest_product: VS\Next\Promotions\Domain\Profit\Types\CheapestProductPercentDiscountProfit    
   table: promotions_judgments_profits
   id:
     id:

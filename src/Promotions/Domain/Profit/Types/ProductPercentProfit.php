@@ -15,14 +15,13 @@ class ProductPercentProfit extends Profit implements LineProfitInterface
     {
     }
 
-    public function calculateProfitToCartLine(CartLine $cartLine): CalculatedLineDiscount
+    public function calculateProfitToCartLine(CartLine $cartLine): ?CalculatedLineDiscount
     {
-        $product = $cartLine->getProduct();
-
         return new CalculatedLineDiscount(
-            $product,
+            $cartLine,
             DiscountType::createPercent(),
             $this->percent,
+            $cartLine->getUnits(),
             $this->getJudgment()
         );
     }

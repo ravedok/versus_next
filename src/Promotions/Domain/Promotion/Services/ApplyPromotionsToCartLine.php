@@ -12,20 +12,54 @@ use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableInterface;
 class ApplyPromotionsToCartLine
 {
     /** @param Judgment[] $judgments  */
-    public  function __invoke(array $judgments, CartLine $cartLine): void
+    public function __invoke(array $judgments, CartLine $cartLine): void
     {
         $candidates = [];
 
         $this->recoveryDiscountFromProductOffer($candidates, $cartLine);
         $this->recoveryDiscountsFromJudgments($candidates, $cartLine, $judgments);
+
+        $this->applyBestDiscountToLine($cartLine, $candidates);
+    }
+
+    /** @param CalculatedLineDiscount[] $candidates */
+    private function applyBestDiscountToLine(CartLine $cartLine, array $candidates): void
+    {
         $discount = $this->reduceCandidates($candidates);
 
+        $this->applyPartialDiscount($cartLine, $discount, $candidates);
+
         $cartLine->setAppliedDiscount($discount);
+    }
+
+    private function applyPartialDiscount(CartLine $cartLine, ?CalculatedLineDiscount $discount, array $candidates): void
+    {
+        if ($discount === null) {
+            return;
+        }
+
+        $remainingUnits = $cartLine->getUnits() - $discount->getUnits();
+
+        if ($remainingUnits <= 0) {
+            return;
+        }
+
+        $partialLine = (clone $cartLine)->setUnits($remainingUnits);
+
+        $cartLine->getCart()->addLine($partialLine);
+
+        $cartLine->setUnits($discount->getUnits());
+
+        unset($candidates[array_search($discount, $candidates, true)]);
+
+        $this->applyBestDiscountToLine($partialLine, $candidates);
     }
 
     /** @param CalculatedLineDiscount[] $candidates */
     private function reduceCandidates(array $candidates): ?CalculatedLineDiscount
     {
+        $candidates = array_filter($candidates);
+
         return array_reduce($candidates, function (?CalculatedLineDiscount $carry, CalculatedLineDiscount $current) {
             if ($carry === null) {
                 return $current;
@@ -45,9 +79,11 @@ class ApplyPromotionsToCartLine
      * */
     private function recoveryDiscountsFromJudgments(array &$candidates, CartLine $cartLine, array $judgments): void
     {
-        foreach ($judgments as $judgment) {
-            if ($judgment->isApplicableToCartLine($cartLine)) {
-                $candidates[] = $judgment->applyToCartLine($cartLine);
+        $applicableJudgments = array_filter($judgments, fn (Judgment $judgment) => $judgment->isApplicableToCartLine($cartLine));
+
+        foreach ($applicableJudgments as $judgment) {
+            if ($discount = $judgment->applyToCartLine($cartLine)) {
+                $candidates[] = $discount;
             }
         }
     }
@@ -71,9 +107,10 @@ class ApplyPromotionsToCartLine
         }
 
         $discount = new CalculatedLineDiscount(
-            $product,
+            $cartLine,
             $offer->getType(),
-            DiscountHelper::calculateDiscountPercent($product->getPrice(), $offer->getPrice())
+            DiscountHelper::calculateDiscountPercent($product->getPrice(), $offer->getPrice()),
+            $cartLine->getUnits()
         );
 
         $candidates[] = $discount;

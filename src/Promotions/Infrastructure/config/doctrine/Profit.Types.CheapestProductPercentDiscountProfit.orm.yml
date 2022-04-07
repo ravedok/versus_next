@@ -1,0 +1,7 @@
+VS\Next\Promotions\Domain\Profit\Types\CheapestProductPercentDiscountProfit:
+  type: entity
+  fields:
+    percent:
+      type: float
+    unitsNeeded:
+      type: integer

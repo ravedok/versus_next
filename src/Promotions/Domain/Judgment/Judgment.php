@@ -101,7 +101,7 @@ class Judgment
         return (new JudgmentToCartChecker($this, $cart))();
     }
 
-    public function applyToCart(Cart $cart): CalculatedCartDiscount
+    public function applyToCart(Cart $cart): ?CalculatedCartDiscount
     {
         if ($this->getProfit() === null) {
             throw new InvalidArgumentException('The criteria does not include a benefit');
@@ -118,7 +118,7 @@ class Judgment
         return (new JudgmentToCartLineChecker($this, $cartLine))();
     }
 
-    public function applyToCartLine(CartLine $cartLine): CalculatedLineDiscount
+    public function applyToCartLine(CartLine $cartLine): ?CalculatedLineDiscount
     {
         if ($this->getProfit() === null) {
             throw new InvalidArgumentException('The criteria does not include a benefit');

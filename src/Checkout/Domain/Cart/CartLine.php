@@ -3,9 +3,7 @@
 namespace VS\Next\Checkout\Domain\Cart;
 
 use VS\Next\Catalog\Domain\Product\Entity\Product;
-use VS\Next\Catalog\Domain\Product\Entity\ProductOffer;
 use VS\Next\Checkout\Domain\Cart\Exception\NotEnoughStockException;
-use VS\Next\Catalog\Domain\Product\Entity\ProductOfferableInterface;
 use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 
 abstract class CartLine
@@ -115,7 +113,6 @@ abstract class CartLine
 
         return $this;
     }
-
 
 
     public function getAppliedDiscount(): ?CalculatedLineDiscount

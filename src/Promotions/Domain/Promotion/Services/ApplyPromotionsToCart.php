@@ -35,12 +35,15 @@ class ApplyPromotionsToCart
         }
 
         $discount = $this->reduceCandidates($candidates);
+
         $cart->setAppliedDiscount($discount);
     }
 
-    /** @param CalculatedCartDiscount[] $candidates */
+    /** @param array<CalculatedCartDiscount|null> $candidates */
     private function reduceCandidates(array $candidates): ?CalculatedCartDiscount
     {
+        $candidates = array_filter($candidates);
+
         return array_reduce($candidates, function (?CalculatedCartDiscount $carry, CalculatedCartDiscount $current) {
             if ($carry === null) {
                 return $current;

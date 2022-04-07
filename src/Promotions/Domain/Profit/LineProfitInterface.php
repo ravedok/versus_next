@@ -7,5 +7,5 @@ use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 
 interface LineProfitInterface
 {
-    public function calculateProfitToCartLine(CartLine $cartLine): CalculatedLineDiscount;
+    public function calculateProfitToCartLine(CartLine $cartLine): ?CalculatedLineDiscount;
 }

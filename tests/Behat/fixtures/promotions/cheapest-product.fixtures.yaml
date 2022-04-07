@@ -1,0 +1,26 @@
+include:
+  - ../global-fixtures.yaml
+  - ../../../../fixtures/promotions/promotion.yaml
+
+VS\Next\Promotions\Domain\Promotion\Promotion:
+  promotion_cheapest_product_percent_30:
+    __construct: 
+      - <promotionId()>
+      - true
+      - <promotionNameFromString("Descuento del 30% al producto más barato")>
+      - <promotionDuration(-1, +1)>
+
+VS\Next\Promotions\Domain\Profit\Types\CheapestProductPercentDiscountProfit:
+  profit_cheapest_product_percent_30:
+    __construct: [<profitId()>, 30, 3]
+
+VS\Next\Promotions\Domain\Judgment\Judgment:
+  judgment_cheapest_product_discount_30:
+    __construct:
+      - <judgmentId()>
+      - <judgmentNameFromString('Criterio Descuento del 30% al producto más barato')>
+    promotion: '@promotion_cheapest_product_percent_30'
+    profit: '@profit_cheapest_product_percent_30'
+    categories:
+      - '@category_chairs'
+

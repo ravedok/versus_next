@@ -7,5 +7,5 @@ use VS\Next\Promotions\Domain\Shared\CalculatedCartDiscount;
 
 interface CartProfitInterface
 {
-    public function calculateProfitToCart(Cart $cart): CalculatedCartDiscount;
+    public function calculateProfitToCart(Cart $cart): ?CalculatedCartDiscount;
 }
