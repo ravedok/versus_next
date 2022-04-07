@@ -20,6 +20,11 @@ VS\Next\Promotions\Domain\Judgment\Judgment:
       targetEntity: VS\Next\Catalog\Domain\Category\Category
       joinTable:
         name: promotions_judgments_categories
+    brands:
+      targetEntity: VS\Next\Catalog\Domain\Brand\Brand
+      joinTable:
+        name: promotions_judgments_brands
+  
   oneToOne:
     profit:
       targetEntity: VS\Next\Promotions\Domain\Profit\Profit

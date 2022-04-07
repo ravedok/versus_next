@@ -4,6 +4,7 @@ namespace VS\Next\Promotions\Domain\Judgment;
 
 use InvalidArgumentException;
 use VS\Next\Checkout\Domain\Cart\Cart;
+use VS\Next\Catalog\Domain\Brand\Brand;
 use VS\Next\Checkout\Domain\Cart\CartLine;
 use Doctrine\Common\Collections\Collection;
 use VS\Next\Promotions\Domain\Profit\Profit;
@@ -13,15 +14,17 @@ use VS\Next\Promotions\Domain\Judgment\JudgmentId;
 use VS\Next\Promotions\Domain\Promotion\Promotion;
 use VS\Next\Promotions\Domain\Judgment\JudgmentName;
 use VS\Next\Promotions\Domain\Profit\CartProfitInterface;
-use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 use VS\Next\Promotions\Domain\Profit\LineProfitInterface;
 use VS\Next\Promotions\Domain\Shared\CalculatedCartDiscount;
+use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
 
 class Judgment
 {
     private Promotion $promotion;
     /** @var Collection<int, Category> */
     private Collection $categories;
+    /** @var Collection<int, Brand> */
+    private Collection $brands;
     private ?Profit $profit = null;
 
     public function __construct(
@@ -29,6 +32,7 @@ class Judgment
         private JudgmentName $name,
     ) {
         $this->categories = new ArrayCollection();
+        $this->brands = new ArrayCollection();
     }
 
     public function setPromotion(Promotion $promotion): self
@@ -78,6 +82,33 @@ class Judgment
     public function getCategories(): Collection
     {
         return $this->categories;
+    }
+
+    public function addBrand(Brand $brand): self
+    {
+        if ($this->brands->contains($brand)) {
+            return $this;
+        }
+
+        $this->brands->add($brand);
+
+        return $this;
+    }
+
+    public function removeBrand(Brand $brand): self
+    {
+        if (!$this->brands->contains($brand)) {
+            return $this;
+        }
+        $this->brands->removeElement($brand);
+
+        return $this;
+    }
+
+    /** @return Collection<int, Brand> */
+    public function getBrands(): Collection
+    {
+        return $this->brands;
     }
 
     public function getProfit(): ?Profit
