@@ -7,7 +7,7 @@ VS\Next\Promotions\Domain\Judgment\JudgmentProductIncluded:
       unique: true
       id: true  
   fields:
-    group:
+    groupNumber:
       type: integer
   manyToOne:
     judgment:
