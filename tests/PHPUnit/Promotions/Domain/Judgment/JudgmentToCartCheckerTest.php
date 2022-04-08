@@ -5,6 +5,7 @@ namespace VS\Next\Tests\PHPUnit\Promotions\Domain\Judgment;
 use PHPUnit\Framework\TestCase;
 use VS\Next\Checkout\Domain\Cart\Cart;
 use VS\Next\Promotions\Domain\Judgment\Judgment;
+use VS\Next\Promotions\Domain\Judgment\JudgmentProductIncluded;
 use VS\Next\Tests\PHPUnit\Checkout\Domain\Cart\CartMother;
 use VS\Next\Promotions\Domain\Judgment\JudgmentToCartChecker;
 use VS\Next\Promotions\Domain\Profit\Profit;
@@ -63,6 +64,36 @@ class JudgmentToCartCheckerTest extends TestCase
         $applicable = $cheker();
 
         $this->assertFalse($applicable);
+    }
+
+    public function test_if_products_included_not_match_then_false(): void
+    {
+        $product = ProductMother::get();
+        $cartLine = NormalCartLineMother::get($product);
+        $cart = $this->getCart()->addLine($cartLine);
+
+        $otherProduct = ProductMother::get();
+
+        $judgment = $this->getJudgment()->addProductIncluded($otherProduct);
+
+        $cheker = new JudgmentToCartChecker($judgment, $cart);
+        $applicable = $cheker();
+
+        $this->assertFalse($applicable);
+    }
+
+    public function test_if_products_included_match_then_true(): void
+    {
+        $product = ProductMother::get();
+        $cartLine = NormalCartLineMother::get($product);
+        $cart = $this->getCart()->addLine($cartLine);
+
+        $judgment = $this->getJudgment()->addProductIncluded($product);
+
+        $cheker = new JudgmentToCartChecker($judgment, $cart);
+        $applicable = $cheker();
+
+        $this->assertTrue($applicable);
     }
 
     private function getJudgment(Profit $profit = null): Judgment

@@ -3,6 +3,7 @@
 namespace VS\Next\Promotions\Domain\Judgment;
 
 use VS\Next\Checkout\Domain\Cart\Cart;
+use VS\Next\Checkout\Domain\Cart\CartLine;
 use VS\Next\Promotions\Domain\Judgment\Judgment;
 use VS\Next\Promotions\Domain\Profit\CartProfitInterface;
 
@@ -19,6 +20,10 @@ class JudgmentToCartChecker
         }
 
         if (!$this->isValidCategory()) {
+            return false;
+        }
+
+        if (!$this->hasSomeIncludedProducts()) {
             return false;
         }
 
@@ -52,6 +57,31 @@ class JudgmentToCartChecker
             $productCategory = $line->getProduct()->getCategory();
 
             if (in_array($productCategory, $categories)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasSomeIncludedProducts(): bool
+    {
+        $productsIncluded = $this->judgment
+            ->getProductsIncluded()
+            ->map(fn (JudgmentProductIncluded $productIncluded) => $productIncluded->getProduct())
+            ->toArray();
+
+        if (empty($productsIncluded)) {
+            return true;
+        }
+
+        $productsInCart = $this->cart
+            ->getLines()
+            ->map(fn (CartLine $cartLine) => $cartLine->getProduct())
+            ->toArray();
+
+        foreach ($productsIncluded as $product) {
+            if (in_array($product, $productsInCart)) {
                 return true;
             }
         }

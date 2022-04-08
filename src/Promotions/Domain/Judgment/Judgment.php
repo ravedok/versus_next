@@ -133,7 +133,7 @@ class Judgment
         return $this;
     }
 
-    public function addProductIncluded(Product $product, int $group): self
+    public function addProductIncluded(Product $product, int $group = 1): self
     {
         $productIncluded = new JudgmentProductIncluded(Uuid::uuid4(), $this,  $product, $group);
 

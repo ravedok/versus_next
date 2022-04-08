@@ -46,7 +46,22 @@ class JudgmentToCartLineChecker
 
     private function isValidProduct(): bool
     {
-        return $this->cartline->getProduct()->isAllowPromotions();
+        if (!$this->cartline->getProduct()->isAllowPromotions()) {
+            return false;
+        }
+
+        $productsIncluded = $this->judgment
+            ->getProductsIncluded()
+            ->map(fn (JudgmentProductIncluded $productIncluded) => $productIncluded->getProduct())
+            ->toArray();
+
+        if (empty($productsIncluded)) {
+            return true;
+        }
+
+        $productInCart = $this->cartline->getProduct();
+
+        return in_array($productInCart, $productsIncluded);
     }
 
     private function isValidCategory(): bool

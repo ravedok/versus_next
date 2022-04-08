@@ -12,7 +12,7 @@ class JudgmentProductIncluded
         private UuidInterface $id,
         private Judgment $judgment,
         private Product $product,
-        private int $group
+        private int $groupNumber
     ) {
     }
 
@@ -33,6 +33,6 @@ class JudgmentProductIncluded
 
     public function getGroup(): int
     {
-        return $this->group;
+        return $this->groupNumber;
     }
 }

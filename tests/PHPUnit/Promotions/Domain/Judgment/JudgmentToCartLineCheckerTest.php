@@ -17,98 +17,115 @@ use VS\Next\Tests\PHPUnit\Promotions\Domain\Profit\ProductPercentProfitMother;
 
 class JudgmentToCartLineCheckerTest extends TestCase
 {
-    private Category $category;
-
     public function test_if_cart_line_is_valid_success(): void
     {
-        $judgment = $this->getJudgment();
-        $cartLine = $this->getCartLine();
+        $category = CategoryMother::get();
+        $product = ProductMother::get()
+            ->setCategory($category);
+        $judgment = $this->createJudgment()
+            ->addProductIncluded($product)
+            ->addCategory($category);
+        $cartLine = $this->createCartLine($product);
 
         $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
 
-        $this->assertEquals(true, $applicable);
+        $this->assertTrue($applicable);
     }
 
     public function test_is_product_category_is_empty_fail(): void
     {
-        $judgment = $this->getJudgment();
+        $category = CategoryMother::get();
+        $judgment = $this->createJudgment()->addCategory($category);
 
         $product = (ProductMother::get())->setCategory(null);
 
-        $cartLine = $this->getCartLine(product: $product);
+        $cartLine = $this->createCartLine(product: $product);
 
         $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
 
-        $this->assertEquals(false, $applicable);
+        $this->assertFalse($applicable);
     }
 
     public function test_is_product_category_is_invalid_fail(): void
     {
-
+        $category = CategoryMother::get();
         $otherCategory = CategoryMother::get();
 
-        $product = (ProductMother::get())->setCategory($otherCategory);
+        $product = (ProductMother::get())->setCategory($category);
 
-        $judgment = $this->getJudgment();
-        $cartLine = $this->getCartLine($product);
+        $judgment = $this->createJudgment()->addCategory($otherCategory);
+        $cartLine = $this->createCartLine($product);
 
         $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
 
-        $this->assertEquals(false, $applicable);
+        $this->assertFalse($applicable);
     }
 
     public function test_profit_does_not_affect_a_line_fail(): void
     {
         $profit = CartAmountDiscountProfitMother::get();
-        $judgment = $this->getJudgment(profit: $profit);
-        $cartLine = $this->getCartLine();
+        $judgment = $this->createJudgment(profit: $profit);
+        $cartLine = $this->createCartLine();
 
         $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
 
-        $this->assertEquals(false, $applicable);
+        $this->assertFalse($applicable);
     }
 
     public function test_is_profit_is_null_fail(): void
     {
-        $judgment = $this->getJudgment()
+        $judgment = $this->createJudgment()
             ->setProfit(null);
 
         $cartLine = NormalCartLineMother::get();
 
         $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
 
-        $this->assertEquals(false, $applicable);
+        $this->assertFalse($applicable);
     }
 
-    private function getJudgment(?Profit $profit = null): Judgment
+    public function test_if_product_not_included_fail(): void
+    {
+        $product = ProductMother::get();
+        $cartLine = $this->createCartLine($product);
+        $otherProduct = ProductMother::get();
+        $judgment = $this->createJudgment()->addProductIncluded($otherProduct);
+
+
+        $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
+
+        $this->assertFalse($applicable);
+    }
+
+    public function test_if_product_included_true(): void
+    {
+        $product = ProductMother::get();
+        $cartLine = $this->createCartLine($product);
+        $judgment = $this->createJudgment()->addProductIncluded($product);
+
+        $applicable = JudgmentToCartLineChecker::check($judgment, $cartLine);
+
+        $this->assertTrue($applicable);
+    }
+
+    private function createJudgment(?Profit $profit = null): Judgment
     {
         if ($profit === null) {
             $profit = ProductPercentProfitMother::get();
         }
 
-        $judgment = JudgmentMother::get($profit)
-            ->addCategory($this->getCategory());
+        $judgment = JudgmentMother::get($profit);
 
 
         return $judgment;
     }
 
-    private function getCartLine(?Product $product = null): CartLine
+    private function createCartLine(?Product $product = null): CartLine
     {
         if ($product === null) {
-            $product = ProductMother::get()
-                ->setCategory($this->category);
+            $product = ProductMother::get();
         }
 
         return NormalCartLineMother::get($product);
-    }
-
-    private function getCategory(): Category
-    {
-        if (!isset($this->category)) {
-            $this->category = CategoryMother::get();
-        }
-
-        return $this->category;
     }
 }
