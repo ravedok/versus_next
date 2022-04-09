@@ -30,8 +30,9 @@ class SaveCartInSessionService
         $data['lines'] = $cart->getLines()->map(function (CartCartLine $line) {
             $product = $line->getProduct();
             return [
-                'productId'         => $product->getId()->value(),
-                'units'      => $line->getUnits()
+                'productId'  => $product->getId()->value(),
+                'units'      => $line->getUnits(),
+                'type'       => $line->getType()->value()
             ];
         })->toArray();
 

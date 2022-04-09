@@ -54,6 +54,7 @@ Feature: set-product
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
+          "type": "NORMAL",
           "units": 3
         }]
       }

@@ -11,6 +11,7 @@ Feature: cheapest-product-percent
       {
         "lines": [{
           "productId": "{{ normal_product_with_offer.id }}",
+          "type": "NORMAL",
           "units": 3
         }]
       }

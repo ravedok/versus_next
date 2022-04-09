@@ -29,6 +29,7 @@ Feature: remove-product
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
+          "type": "NORMAL",
           "units": 3
         }]
       }
@@ -63,6 +64,7 @@ Feature: remove-product
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
+          "type": "NORMAL",
           "units": 1
         }]
       }

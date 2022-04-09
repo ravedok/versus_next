@@ -2,6 +2,9 @@
 
 namespace VS\Next\Checkout\Domain\Cart;
 
+use InvalidArgumentException;
+use VS\Next\Catalog\Domain\Product\Entity\Product;
+
 class CartLineType
 {
     public const NORMAL = 'NORMAL';
@@ -69,5 +72,47 @@ class CartLineType
     public static function createCustomized(): self
     {
         return new self(self::CUSTOMIZED);
+    }
+
+    public function createCartLine(Product $product, int $units = 0, bool $free = false): CartLine
+    {
+        if ($this->isNormal()) {
+            return new NormalCartLine($product, $units, $free);
+        }
+
+        if ($this->isGiftCard()) {
+            return new GiftCardCartLine($product, $units);
+        }
+
+        if ($this->isReconditioned()) {
+            return new ReconditionedCartLine($product, $units);
+        }
+
+        if ($this->isCustomized()) {
+            return new CustomizedCartLine($product, $units);
+        }
+
+        throw new InvalidArgumentException('The creation of lines for this type has not been implemented');
+    }
+
+    public static function fromString(string $type): self
+    {
+        if ($type === self::NORMAL) {
+            return self::createNormal();
+        }
+
+        if ($type === self::RECONDITIONED) {
+            return self::createReconditioned();
+        }
+
+        if ($type === self::CUSTOMIZED) {
+            return self::createCustomized();
+        }
+
+        if ($type === self::GIFT_CARD) {
+            return self::createGiftCard();
+        }
+
+        throw new InvalidArgumentException('The specified type is not valid.');
     }
 }

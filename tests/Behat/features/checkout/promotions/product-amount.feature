@@ -11,6 +11,7 @@ Feature: promotion-product-amount
       {
         "lines": [{
           "productId": "{{ normal_product_with_offer.id }}",
+          "type": "NORMAL",
           "units": 2
         }]
       }

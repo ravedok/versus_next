@@ -3,10 +3,10 @@
 namespace VS\Next\Checkout\Infrastructure\Service;
 
 use VS\Next\Checkout\Domain\Cart\Cart;
-use VS\Next\Checkout\Domain\Cart\NormalCartLine;
 use Symfony\Component\HttpFoundation\RequestStack;
 use VS\Next\Catalog\Domain\Product\Entity\ProductId;
 use VS\Next\Catalog\Domain\Product\ProductRepository;
+use VS\Next\Checkout\Domain\Cart\CartLineType;
 use VS\Next\Checkout\Infrastructure\Helper\CartSessionHelper;
 
 class CartFromSessionFactory
@@ -56,8 +56,8 @@ class CartFromSessionFactory
                 continue;
             }
 
-            $cartLine = new NormalCartLine($product, $line['units']);
-
+            $type = CartLineType::fromString($line['type']);
+            $cartLine = $type->createCartLine($product, $line['units']);
             $cart->addLine($cartLine);
         }
     }

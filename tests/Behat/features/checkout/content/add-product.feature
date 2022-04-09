@@ -35,6 +35,7 @@ Feature: add-product
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
+          "type": "NORMAL",
           "units": 1
         }]
       }

@@ -15,9 +15,11 @@ Feature: checkout-data
       {
         "lines": [{
           "productId": "{{ normal_product.id }}",
+          "type": "NORMAL",
           "units": 2
         },{
           "productId": "{{ normal_product_with_offer.id }}",
+          "type": "NORMAL",
           "units": 1
         }]
       }
