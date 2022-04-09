@@ -7,10 +7,10 @@ use VS\Next\Checkout\Domain\Cart\CustomizedCartLine;
 
 class NormalCartLine extends CartLine
 {
-    public function __construct(Product $product, int $units = 0)
+    public function __construct(Product $product, int $units = 0, bool $free = false)
     {
         $this->type = CartLineType::createNormal();
-        parent::__construct($product, $units);
+        parent::__construct($product, $units, $free);
     }
 
     public function maxUnits(): ?int

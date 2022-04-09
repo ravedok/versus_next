@@ -1,0 +1,5 @@
+VS\Next\Promotions\Domain\Profit\Types\FreeProductBuyingProductProfit:
+  type: entity
+  manyToOne:
+    product:
+      targetEntity: VS\Next\Catalog\Domain\Product\Entity\Product

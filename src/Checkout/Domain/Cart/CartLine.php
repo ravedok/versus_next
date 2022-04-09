@@ -13,13 +13,16 @@ abstract class CartLine
     protected Product $product;
     private int $units = 0;
     protected ?CalculatedLineDiscount $appliedDiscount = null;
+    protected bool $free = false;
 
     public function __construct(
         Product $product,
-        int $units = 0
+        int $units = 0,
+        bool $free = false
     ) {
         $this->product = $product;
         $this->units = $units;
+        $this->free = $free;
     }
 
     public function getCart(): Cart
@@ -114,7 +117,6 @@ abstract class CartLine
         return $this;
     }
 
-
     public function getAppliedDiscount(): ?CalculatedLineDiscount
     {
         return $this->appliedDiscount;
@@ -123,5 +125,10 @@ abstract class CartLine
     public function getTotal(): float
     {
         return $this->getUnits() * $this->getPrice();
+    }
+
+    public function isFree(): bool
+    {
+        return $this->free;
     }
 }
