@@ -2,6 +2,7 @@
 
 namespace VS\Next\Checkout\Domain\Cart;
 
+use VS\Next\Catalog\Domain\Product\Entity\DiscountType;
 use VS\Next\Catalog\Domain\Product\Entity\Product;
 use VS\Next\Checkout\Domain\Cart\Exception\NotEnoughStockException;
 use VS\Next\Promotions\Domain\Shared\CalculatedLineDiscount;
@@ -119,6 +120,14 @@ abstract class CartLine
 
     public function getAppliedDiscount(): ?CalculatedLineDiscount
     {
+        if ($this->isFree()) {
+            return new CalculatedLineDiscount(
+                $this,
+                DiscountType::createPercent(),
+                100,
+                $this->units
+            );
+        }
         return $this->appliedDiscount;
     }
 

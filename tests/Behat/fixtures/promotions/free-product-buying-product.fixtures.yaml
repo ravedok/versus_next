@@ -1,0 +1,25 @@
+include:
+  - ../global-fixtures.yaml  
+
+VS\Next\Promotions\Domain\Promotion\Promotion:
+  promotion_free_product_buying_product:
+    __construct: 
+      - <promotionId()>
+      - true
+      - <promotionNameFromString("Regalo de un producto comprando otro")>
+      - <promotionDuration(-1, +1)>
+
+VS\Next\Promotions\Domain\Profit\Types\FreeProductBuyingProductProfit:
+  profit_free_product_buying_product:
+    __construct: [<profitId()>, '@normal_product']
+
+VS\Next\Promotions\Domain\Judgment\Judgment:
+  judgment_free_product_buying_product:
+    __construct:
+      - <judgmentId()>
+      - <judgmentNameFromString('Criterio Regalo de un producto comprando otro')>
+    promotion: '@promotion_free_product_buying_product'
+    profit: '@profit_free_product_buying_product'
+    categories:
+      - '@category_chairs'
+
